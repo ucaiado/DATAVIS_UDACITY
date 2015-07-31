@@ -36,5 +36,6 @@ This project is  connected to the <a href="https://udacity.com/course/ud120-nd">
 - [I would like to do something like that](http://www.nytimes.com/interactive/2012/05/17/business/dealbook/how-the-facebook-offering-compares.html?_r=0)
 - [The right chart](http://www.perceptualedge.com/articles/ie/the_right_graph.pdf)
 - [I would like to do something like that](http://emeeks.github.io/gestaltdataviz/section1.html)
+- [Or that](http://www.nytimes.com/interactive/2014/05/19/health/rating-a-health-laws-success.html)
 - [another nice example](http://graphics.wsj.com/us-housing-market/)
 - [read it](http://www.science-craft.com/2014/10/21/data-visualisation-the-power-and-beauty-of-the-grammar-of-graphics/)
