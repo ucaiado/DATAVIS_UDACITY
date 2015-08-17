@@ -41,3 +41,5 @@ I am going to create an explanatory data visualization from a [PISA](http://www.
 - [Or that](http://www.nytimes.com/interactive/2014/05/19/health/rating-a-health-laws-success.html)
 - [another nice example](http://graphics.wsj.com/us-housing-market/)
 - [read it](http://www.science-craft.com/2014/10/21/data-visualisation-the-power-and-beauty-of-the-grammar-of-graphics/)
+- [a box-plot in D3](http://bl.ocks.org/mbostock/4061502)
+- [trend-line in D3](http://bl.ocks.org/benvandyke/8459843)
