@@ -1,12 +1,12 @@
-What Makes Schools Successful
+How Important Is The Time Spent Studying Out Of School
 --------------------------
 
 ###Abstract
-I am going to create an explanatory data visualization from a [PISA](http://www.oecd.org/pisa/home/) dataset using D3.js library. This project is  connected to the <a href="https://udacity.com/course/ud120-nd">Data Visualization and D3.js</a> course, from Udacity. 
+I am going to create an explanatory data visualization from [PISA](http://www.oecd.org/pisa/home/) dataset using html, java script and D3.js library. This project is  connected to the <a href="https://udacity.com/course/ud120-nd">Data Visualization and D3.js</a> course, from Udacity. 
 
 ###The data set
 
- PISA is a worldwide study developed by the Organisation for Economic Co-operation and Development (OECD) which examines the skills of 15-year-old school students around the world. The study assesses students’ mathematics, science, and reading skills and contains a wealth of information on students’ background, their school and the organisation of education systems. For most countries, the sample is around 5,000 students, but in some countries the number is even higher. In total, the PISA 2012 dataset contains data on 485 490 pupils.
+ PISA is a worldwide study developed by the Organisation for Economic Co-operation and Development (OECD) which examines the skills of 15-year-old school students around the world. The study assesses students’ mathematics, science, and reading skills and contains a wealth of information on students’ background, their school and the organisation of education systems. For most countries, the sample is around 5,000 students, but in some countries the number is even higher. In total, the PISA 2012 dataset contains data on 485,490 pupils.
 
 ###Summary
 
