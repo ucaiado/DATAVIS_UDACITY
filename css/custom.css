@@ -1,0 +1,466 @@
+
+@font-face {
+    font-family: "Computer Modern";
+    src: url('http://9dbb143991406a7c655e-aa5fcb0a5a4ec34cff238a2d56ca4144.r56.cf5.rackcdn.com/cmunss.otf');
+}
+@font-face {
+    font-family: "Computer Modern";
+    font-weight: bold;
+    src: url('http://9dbb143991406a7c655e-aa5fcb0a5a4ec34cff238a2d56ca4144.r56.cf5.rackcdn.com/cmunsx.otf');
+}
+@font-face {
+    font-family: "Computer Modern";
+    font-style: oblique;
+    src: url('http://9dbb143991406a7c655e-aa5fcb0a5a4ec34cff238a2d56ca4144.r56.cf5.rackcdn.com/cmunsi.otf');
+}
+@font-face {
+    font-family: "Computer Modern";
+    font-weight: bold;
+    font-style: oblique;
+    src: url('http://9dbb143991406a7c655e-aa5fcb0a5a4ec34cff238a2d56ca4144.r56.cf5.rackcdn.com/cmunso.otf');
+}
+div.cell{
+    width:800px;
+    margin-left:16% !important;
+    margin-right:auto;
+}
+h1 {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;;
+}
+h4{
+    margin-top:12px;
+    margin-bottom: 3px;
+   }
+p{
+    font-family: Computer Modern, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    line-height: 145%;
+    font-size: 130%;
+    /*width:800px;*/
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.dateline {
+    font-size: 1em;
+    line-height: 1.2em;
+    color: #808080;
+}
+
+.timestamp, .alert, .important, .error {
+color: #a81817;
+}
+
+.timestamp {
+    font-size: 10px;
+    font-weight: normal !important;
+    white-space: nowrap;
+}
+
+.CodeMirror{
+        font-family: "Source Code Pro", source-code-pro,Consolas, monospace;
+}
+.prompt{
+    display: None;
+}
+.text_cell_render h5 {
+    font-weight: 300;
+    font-size: 22pt;
+    color: #4057A1;
+    font-style: italic;
+    margin-bottom: .5em;
+    margin-top: 0.5em;
+    display: block;
+}
+
+.warning{
+    color: rgb( 240, 20, 20 )
+    }  
+
+/********************************
+ ** FILE: basicChart.css
+ ********************************/
+
+/* Axes */
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #666;
+  shape-rendering: crispEdges;
+}
+
+.y.axis .domain {
+}
+
+.y.axis .tick {
+  stroke: #666;
+}
+.axis text {
+  font-size: 12px;
+}
+.y text {
+    fill:#666;
+  font-weight: normal;
+}
+
+.y.axis .tick.minor {
+  stroke: #DFDFDF;
+} 
+
+.x.axis .tick {
+  stroke: #666;
+}
+
+.x.axis .domain {
+  stroke: #666;
+}
+
+.x.axis text {
+  fill: #666;
+}
+
+
+
+/********************************
+ ** FILE: basicStepper.css
+ ********************************/
+
+/*Subnav*/
+#nytg-stepper {
+  position: relative;
+  height: 28px;
+  margin: 8px 0 0;
+  padding: 8px 0 0;
+}
+.ink-basicStepper {
+  padding: 0;
+  font-family: Helvetica, Arial;
+  position: relative;
+}
+
+.ink-basicStepper .ink-steps {
+  margin: 0 0 0 10px;
+  padding: 0;
+  display: block;
+  float: left;
+}
+
+.ink-basicStepper .ink-step {
+  font-size: 13px;
+  background-image: none;
+  list-style-type: none;
+  cursor: pointer;
+  display: block;
+  float: left;
+  padding: 0px 7px;
+  margin: 7px 0;
+}
+
+.ink-basicStepper .ink-step a {
+  color: #AAA;
+}
+
+.ink-basicStepper .ink-last {
+  border-right: none;
+}
+
+.ink-basicStepper  .ink-selected {
+    /*padding: 0px;*/
+}
+
+.ink-basicStepper .ink-selected a {
+  font-weight: bold;
+  color: black;
+  /*background: url(../../images/electoral_map/small-pointer.png) no-repeat center bottom;*/
+  padding-bottom: 8px;
+  /*padding: 0px 0px 4px;*/
+  /*border-bottom: 1px solid #ccc;*/
+  /*border-radius: 3px;*/
+}
+
+.ink-basicStepper .ink-stepperButton {
+  padding: 0 12px;
+  margin: 0;
+  display: block;
+  color: white;
+  text-decoration: none;
+  border-radius: 2px;
+/*  text-transform: uppercase;*/
+  font-size: 14px;
+  line-height: 30px;
+  /*width: 30px;*/
+/*  height: 28px;*/
+  outline:none;  
+}
+.ink-basicStepper .ink-next{
+  float: left;
+  background: #004276 url(http://graphics8.nytimes.com/packages/images/newsgraphics/2012/0510-tech-ipos/whiteArrow-right.png) no-repeat 42px center;
+  padding-right: 26px;  
+}
+.ink-basicStepper .ink-previous{
+  float: left;
+  margin-right: 4px;
+  padding-left: 26px;
+  background: #004276 url(http://graphics8.nytimes.com/packages/images/newsgraphics/2012/0510-tech-ipos/whiteArrow-left.png) no-repeat 2px center;  
+}
+
+.ink-basicStepper .ink-stepperButton:hover {
+  background-color: #064D84;
+}
+
+.ink-basicStepper .ink-disabled {
+  background-color: #C2CDD6;
+}
+
+.ink-basicStepper .ink-disabled:hover {
+  background-color: #C2CDD6;
+}
+
+
+
+#interactiveFooter .metaData .credit {
+    text-align: left;
+}
+.columnGroup:last-child, .story:last-child, .story > *:last-child, .ledePhoto > *:last-child, ul:last-child, ul li:last-child, ol:last-child, ol li:last-child, dl:last-child, dl dd:last-child, p:last-child {
+    margin-bottom: 0;
+}
+.byline, .refer, .credit {
+    font-size: 1.1em;
+    line-height: 1.2727em;
+}
+.caption, .credit {
+    color: #808080;
+}
+.credit {
+    font-size: 0.9em;
+    line-height: 1.223em;
+    text-align: right;
+    color: #909090;
+    margin-bottom: 3px;
+}
+
+/********************************
+ ** FILE: base.css
+ ********************************/
+
+/* Structure */
+#nytg-wrapper {
+    margin: 20px auto;
+    padding: 0 10px;
+}
+
+#nytg-ie8-wrapper {
+    width: 950px;
+    margin: 40px auto;
+    padding: 0 10px;
+    display: none;
+}
+
+#nytg-error p {
+  text-align: center;
+  font-size: 13px;
+  line-height: 20px;
+  margin: 10px;
+  border: solid 1px #CCC;
+  background: #ffd;
+  padding: 10px;
+}
+
+.nytg-canvas-wrap {
+  position: relative;
+  border-top: 1px solid black;
+    padding-top: 0px;
+    margin: 12px auto;
+    overflow: hidden;
+}
+#nytg-canvas {
+    position: relative;
+    width: 950px;
+    height: 560px;
+}
+  #nytg-canvas .y path {
+    display: none;
+  }
+
+.company {
+    position: absolute;
+/*  opacity: 0.4;*/
+    border-radius: 1000px;
+/*  -webkit-transition-property: top, left, width, height;
+    -webkit-transition-duration: 2s;
+    -moz-transition-property: top, left, width, height;
+    -moz-transition-duration: 2s;
+    -ms-transition-property: top, left, width, height;
+    -ms-transition-duration: 2s;
+    -o-transition-property: top, left, width, height;
+    -o-transition-duration: 2s;
+    transition-property: top, left, width, height;
+    transition-duration: 2s;*/
+}
+
+.nytg-clip {
+    overflow: hidden;
+}
+
+.nytg-stage {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+}
+
+.nytg-circleContainer {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* Typography */
+
+
+/* Scoop Fixes */
+
+span.noWrap.feedback {
+  white-space: normal;
+}
+
+#interactiveFooter {
+    border-top:1px solid #DDDDDD;
+    margin-top:10px;
+    padding-top:12px !important;
+}
+
+div.storyHeader h1 {
+    font-size: 26px!important;
+    margin-bottom:4px!important;
+    margin-top:3px!important;
+}
+
+/* Legend ---------------------------------------*/
+
+.nytg-canvas-legend {
+  position: absolute;
+  left: 0; top: 30px;
+  color: #666;
+  font: bold 14px/16px Arial;
+  width: 77px;
+  text-align: right;
+}
+  .nytg-canvas-tiny-legend {
+    font: normal 11px/15px Arial;
+  }
+  .nytg-canvas-legend-bottom {
+    top: auto;
+    bottom: 38px;
+    width: 100px;
+    left: 62px;
+  }
+
+/* Explainer ---------------------------------------*/
+
+.nytg-explainer {
+  color: #000;
+  width: 365px;
+  position: absolute;
+  top: 30px;
+  left: 130px;
+}
+  .nytg-explainer .nytg-title {
+    margin-bottom: 7px;
+    font: bold 16px/19px Arial;
+  }
+  .nytg-explainer .nytg-description {
+    font: 15px/19px Georgia; 
+  }
+
+/* Search ---------------------------------------*/
+
+.nytg-stepper-wrapper {
+  position: relative;
+}
+
+#nytg-search {
+  position: absolute; 
+  right: 10px; bottom: 3px;
+}
+  #nytg-search label {
+    display: inline-block;
+    margin-right: 5px;
+    font-size: 12px;
+    color: #999;
+  }
+
+/* Chart popup */
+
+div.nytg-popup {
+    border: 1px solid #bbbbbb;
+    color: black;
+    background-color: white;
+    position: absolute;
+    font-family: Arial, Helvetical, sans-serif;
+    padding: 10px;
+    max-width: 160px;/* */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.nytg-popup-title {
+    font-size: 12px;
+    font-weight: bold;
+    padding-bottom: 4px;
+}
+
+.nytg-popup table {
+    margin-top: 4px;
+    border-collapse:collapse;
+    border-top: 1px solid #ccc;
+    width: 100%;
+}
+
+.nytg-popup td {
+    text-align: center;
+}
+
+.nytg-popup td.row1 {
+    padding-top:6px;
+    padding-bottom:0px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.nytg-popup td.row2 {
+    /*(padding-left: 10px*/
+    font-size: 11px;
+    color: #666;
+}
+
+.nytg-popup td.col2 {
+    padding-left: 10px;
+}
+
+
+.nytg-popup .nytg-popup-label {
+    color: #666;
+    font-weight: normal;
+    font-size: 11px;
+    padding-right: 5px;
+}
+
+.nytg-popup .nytg-popup-value {
+    font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+}
+
+.nytg-popup-line {
+    line-height: 15px;
+}
+
+.nytg-ipo-label {
+    position:absolute;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #666;
+}
+
+.ledeStory .insetHFullWidth .storyHeader .dateline{line-height:2.4em;margin-bottom:3px;margin-top:0px;}
+.insetHFullWidth #articleToolsTop{margin-bottom:0;margin-top:0px;}
+
