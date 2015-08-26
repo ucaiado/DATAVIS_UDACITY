@@ -10,43 +10,71 @@ function buttons() {
   // begin of help functions
   //************************************************************
 
-  function move() {
+  function forward() {
     /*
-    advance in narrative
+    advance in the storyline
     */ 
     
     var i_dataIdx = +d3.select(".ink-selected").attr("data-index")
+    if (i_dataIdx+1>4){
+      var i_now = 4
+    }else{
+      var i_now = i_dataIdx+1
+    }
     
-    list_ink.forEach(function(d){
-        debugger;
-        d;
-    })
-  //   d3.selectAll("bar")
-  // .classed("my-selector", function (d, i) {
-  //   return !d3.select(this).classed("my-selector");
-  // });
-
-    // if (i_dataIdx=="3") {
-    //     // d3.select(".ink-selected").attr("class", ".ink-selected")
-    //     d3.select("data-index").attr("class", ".ink-selected")
-    // } else if (i_dataIdx=="4") {
-
-    // } else {
-
-    // }     
-    
-    // d3.select(".reset").attr("style","display:none;");   
+    //repaint
+    repaint(i_now)
  
   }; 
 
 
+  function backward() {
+    /*
+    go back in the storyline
+    */ 
+    
+    var i_dataIdx = +d3.select(".ink-selected").attr("data-index")
+    if (i_dataIdx-1<0){
+      var i_now = 0
+    }else{
+      var i_now = i_dataIdx-1
+    }
+    
+    //repaint index and buttons
+    repaint(i_now)
+ 
+  }; 
+
   function repaint(i_idx) {
     /*
-    advance in narrative
+    repaint index and buttons
     */ 
-    if (i_idx)
-    debugger;
-    // d3.select(".reset").attr("style","display:none;");   
+
+    //what is selected now
+    var i_dataIdx = +d3.select(".ink-selected").attr("data-index")    
+    //repaint numbers
+    list_ink.forEach(function(d){  
+      d.forEach(function(e){
+        var i_now = +e.attributes['data-index'].value
+        if (i_now==i_dataIdx && i_dataIdx!=i_idx){
+          d3.select("#" + e.attributes['id'].value).attr("class", "ink-step")
+        }else if (i_now==i_idx && i_dataIdx!=i_idx){
+          d3.select("#" + e.attributes['id'].value).attr("class", "ink-step ink-selected")
+        }
+      });      
+    })    
+     
+    //repaint buttons
+    if (i_idx==0){
+      d3.select(".ink-previous").classed("ink-disabled", true)
+      d3.select(".ink-next").classed("ink-disabled", false)
+    }else if (i_idx==4){
+      d3.select(".ink-previous").classed("ink-disabled", false)
+      d3.select(".ink-next").classed("ink-disabled", true)      
+    }else{
+      d3.select(".ink-previous").classed("ink-disabled", false)
+      d3.select(".ink-next").classed("ink-disabled", false)   
+    }
  
   }; 
 
@@ -56,17 +84,18 @@ function buttons() {
   //************************************************************  
 
 
-    d3.select(".ink-previous").on("click", move);
-    d3.select(".ink-next").on("click", move);
+    d3.select(".ink-previous").on("click", backward);
+    d3.select(".ink-next").on("click", forward);
 
     var list_ink = d3.selectAll(".ink-step")
 
     list_ink.on("click", function(d) {
-        debugger;
-       d3.select(".ink-selected")
-            .classed(".ink-selected", false);
-       d3.select(this)
-            .classed(".ink-selected", true);
+      var i_now = +this.attributes['data-index'].value
+      repaint(i_now);
+       // d3.select(".ink-selected")
+       //      .classed(".ink-selected", false);
+       // d3.select(this)
+       //      .classed(".ink-selected", true);
         });
 
 
