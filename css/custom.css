@@ -125,7 +125,7 @@ color: #a81817;
  ********************************/
 
 /*Subnav*/
-#nytg-stepper {
+#my-stepper {
   position: relative;
   height: 28px;
   margin: 8px 0 0;
@@ -243,19 +243,19 @@ color: #a81817;
  ********************************/
 
 /* Structure */
-#nytg-wrapper {
+#my-wrapper {
     margin: 20px auto;
     padding: 0 10px;
 }
 
-#nytg-ie8-wrapper {
+#my-ie8-wrapper {
     width: 950px;
     margin: 40px auto;
     padding: 0 10px;
     display: none;
 }
 
-#nytg-error p {
+#my-error p {
   text-align: center;
   font-size: 13px;
   line-height: 20px;
@@ -265,19 +265,19 @@ color: #a81817;
   padding: 10px;
 }
 
-.nytg-canvas-wrap {
+.my-canvas-wrap {
   position: relative;
   border-top: 1px solid black;
     padding-top: 0px;
     margin: 12px auto;
     overflow: hidden;
 }
-#nytg-canvas {
+#my-canvas {
     position: relative;
     width: 950px;
     height: 560px;
 }
-  #nytg-canvas .y path {
+  #my-canvas .y path {
     display: none;
   }
 
@@ -297,17 +297,17 @@ color: #a81817;
     transition-duration: 2s;*/
 }
 
-.nytg-clip {
+.my-clip {
     overflow: hidden;
 }
 
-.nytg-stage {
+.my-stage {
     position: absolute;
     padding: 0;
     margin: 0;
 }
 
-.nytg-circleContainer {
+.my-circleContainer {
     position: absolute;
     padding: 0;
     margin: 0;
@@ -337,7 +337,7 @@ div.storyHeader h1 {
 
 /* Legend ---------------------------------------*/
 
-.nytg-canvas-legend {
+.my-canvas-legend {
   position: absolute;
   left: 0; top: 30px;
   color: #666;
@@ -345,10 +345,10 @@ div.storyHeader h1 {
   width: 77px;
   text-align: right;
 }
-  .nytg-canvas-tiny-legend {
+  .my-canvas-tiny-legend {
     font: normal 11px/15px Arial;
   }
-  .nytg-canvas-legend-bottom {
+  .my-canvas-legend-bottom {
     top: auto;
     bottom: 38px;
     width: 100px;
@@ -357,32 +357,32 @@ div.storyHeader h1 {
 
 /* Explainer ---------------------------------------*/
 
-.nytg-explainer {
+.my-explainer {
   color: #000;
   width: 365px;
   position: absolute;
   top: 30px;
   left: 130px;
 }
-  .nytg-explainer .nytg-title {
+  .my-explainer .my-title {
     margin-bottom: 7px;
     font: bold 16px/19px Arial;
   }
-  .nytg-explainer .nytg-description {
+  .my-explainer .my-description {
     font: 15px/19px Georgia; 
   }
 
 /* Search ---------------------------------------*/
 
-.nytg-stepper-wrapper {
+.my-stepper-wrapper {
   position: relative;
 }
 
-#nytg-search {
+#my-search {
   position: absolute; 
   right: 10px; bottom: 3px;
 }
-  #nytg-search label {
+  #my-search label {
     display: inline-block;
     margin-right: 5px;
     font-size: 12px;
@@ -391,7 +391,7 @@ div.storyHeader h1 {
 
 /* Chart popup */
 
-div.nytg-popup {
+div.my-popup {
     border: 1px solid #bbbbbb;
     color: black;
     background-color: white;
@@ -402,59 +402,59 @@ div.nytg-popup {
     box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
-.nytg-popup-title {
+.my-popup-title {
     font-size: 12px;
     font-weight: bold;
     padding-bottom: 4px;
 }
 
-.nytg-popup table {
+.my-popup table {
     margin-top: 4px;
     border-collapse:collapse;
     border-top: 1px solid #ccc;
     width: 100%;
 }
 
-.nytg-popup td {
+.my-popup td {
     text-align: center;
 }
 
-.nytg-popup td.row1 {
+.my-popup td.row1 {
     padding-top:6px;
     padding-bottom:0px;
     font-size: 16px;
     font-weight: bold;
 }
 
-.nytg-popup td.row2 {
+.my-popup td.row2 {
     /*(padding-left: 10px*/
     font-size: 11px;
     color: #666;
 }
 
-.nytg-popup td.col2 {
+.my-popup td.col2 {
     padding-left: 10px;
 }
 
 
-.nytg-popup .nytg-popup-label {
+.my-popup .my-popup-label {
     color: #666;
     font-weight: normal;
     font-size: 11px;
     padding-right: 5px;
 }
 
-.nytg-popup .nytg-popup-value {
+.my-popup .my-popup-value {
     font-weight: bold;
     font-size: 12px;
     text-align: center;
 }
 
-.nytg-popup-line {
+.my-popup-line {
     line-height: 15px;
 }
 
-.nytg-ipo-label {
+.my-ipo-label {
     position:absolute;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
