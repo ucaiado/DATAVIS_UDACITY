@@ -55,21 +55,39 @@
 
 
                 </div>
+
+
                 <div class="my-canvas-wrap">
-                    <div class="my-canvas-legend">
-                        Company value
-                        <div class="my-canvas-tiny-legend">
-                            In billions of today's dollars
+                    <div class="row">                    
+                        <div class="my-canvas-legend">
+                            Hours 
+                            <div class="my-canvas-tiny-legend">
+                                per week
+                            </div>
+                        </div>
+
+                        <div class="my-explainer">
+                            <div class="my-title">Hours Studied at Udacity</div>
+                            <div class="my-description">
+                                Describe number of weeks and median of week. 
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 my-canvas">
+                            <div id = "UdacityBars"\></div>
+                        </div>
+                        <div class="my-canvas-legend my-canvas-legend-bottom">
+                            Date
                         </div>
                     </div>
-                    <div class="my-explainer">
-                        <div class="my-title">The Tech I.P.O.'s</div>
-                        <div class="my-description">Since 1980, there have been about 2,400 technology, Internet and telecom initial public offerings. Until this week, the largest by market capitalization was Google, which was valued at $23 billion, or about $28 billion in today’s dollars. </div>
-                    </div>
-                    <div class="my-canvas-legend my-canvas-legend-bottom">
-                        Year of I.P.O.
-                    </div>
+
+ 
+
                 </div>
+
+
+
+
             </div>
         </div>
     </div>
@@ -78,13 +96,14 @@
 
 
 
-    <div class="row">
-        <div class="col-md-12">
-         
+<!--     <div class="row">
+        <div class="col-md-12 text-center">
+            <h4>Bla</h4>
+            <div id = "UdacityBars"\></div>
 
         </div>
 
-    </div>       
+    </div>   -->     
 
 
 </div><!--close .container -->
@@ -124,53 +143,14 @@
 
 <!-- Charts -->
 <script type="text/javascript" src="/js/walk_explanations.js"></script> 
+<script type="text/javascript" src="/js/udacity_hours.js"></script> 
  
 
-<script type="text/javascript"> 
-    buttons()
-    //set the parser to date / time
-    // format = d3.time.format("%Y-%m-%d %H:%M:%S.%L");
+<script type="text/javascript">
+    //Handle data;
+    handle_data();
 
-    // var my_data = {{my_data|safe}};
-
-
-    // // var mainhits_data = [{'name': 'Acertou', 'value': 10, 'class': 'pos'},
-    // //                       {'name': 'Saiu no Zero', 'value': 60, 'class': 'zero'},
-    // //                       {'name': 'Errou', 'value': 30, 'class': 'neg'}];
-    // var mainhits_data = my_data[2]
-
-    // my_data[1] = my_data[1].map(function(d) {
-    //   // transform data
-    //   var str = d['DATE'];
-    //   if (str.length<20){
-    //     str+='.000000';
-    //   };
-      
-    //   d['DATE'] = format.parse(str.substring(0, 23));
-    //   d['id_mkt'] = +d['id_mkt'];
-    //   d['Lado'] = +d['Lado']
-    //   d['Resultado'] = +d['Resultado']
-    //   d['Tipo'] = +d['Tipo']
-    //   d['Qtd'] = +d['Qtd']
-    //   d['preco'] = +d['preco']
-    //   d['Boleta'] = +d['Boleta']
-    //   d['Pos'] = +d['Pos']
-    //   d['PnLM'] = +d['PnLM']
-    //   d['PnLm'] = +d['PnLm']
-    //   d['PnLUnt'] = +d['PnLUnt']
-    //   d['cumV'] = +d['cumV']
-    //   d['cumQ'] = +d['cumQ']
-
-    //   return d;
-    //   });
-
-
-    // draw(my_data[1],my_data[0]['BINSIZE'])
-
-
-    // debugger;
-    // drawStatics(mainhits_data, my_data[0], my_data[3], my_data[4])
-
+    draw_udacity();
 
 
 

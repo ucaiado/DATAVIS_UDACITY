@@ -35,7 +35,6 @@ p{
     font-family: Computer Modern, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
     line-height: 145%;
     font-size: 130%;
-    /*width:800px;*/
     margin-left:auto;
     margin-right:auto;
 }
@@ -84,7 +83,7 @@ color: #a81817;
 
 .axis path, .axis line {
   fill: none;
-  stroke: #666;
+  /*stroke: #666;*/
   shape-rendering: crispEdges;
 }
 
@@ -95,10 +94,11 @@ color: #a81817;
   stroke: #666;
 }
 .axis text {
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
 }
 .y text {
-    fill:#666;
+  fill:#666;
   font-weight: normal;
 }
 
@@ -118,6 +118,20 @@ color: #a81817;
   fill: #666;
 }
 
+rect {
+  /*fill: lightgrey;*/
+  shape-rendering: crispEdges;
+}
+
+rect:hover{
+  fill: rgba(0,0,0,.8);
+}
+
+.barlabel{
+  color: #585f69;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10px;  
+}
 
 
 /********************************
@@ -170,11 +184,7 @@ color: #a81817;
 .ink-basicStepper .ink-selected a {
   font-weight: bold;
   color: black;
-  /*background: url(../../images/electoral_map/small-pointer.png) no-repeat center bottom;*/
   padding-bottom: 8px;
-  /*padding: 0px 0px 4px;*/
-  /*border-bottom: 1px solid #ccc;*/
-  /*border-radius: 3px;*/
 }
 
 .ink-basicStepper .ink-stepperButton {
@@ -184,11 +194,8 @@ color: #a81817;
   color: white;
   text-decoration: none;
   border-radius: 2px;
-/*  text-transform: uppercase;*/
   font-size: 14px;
   line-height: 30px;
-  /*width: 30px;*/
-/*  height: 28px;*/
   outline:none;  
 }
 .ink-basicStepper .ink-next{
@@ -283,18 +290,7 @@ color: #a81817;
 
 .company {
     position: absolute;
-/*  opacity: 0.4;*/
     border-radius: 1000px;
-/*  -webkit-transition-property: top, left, width, height;
-    -webkit-transition-duration: 2s;
-    -moz-transition-property: top, left, width, height;
-    -moz-transition-duration: 2s;
-    -ms-transition-property: top, left, width, height;
-    -ms-transition-duration: 2s;
-    -o-transition-property: top, left, width, height;
-    -o-transition-duration: 2s;
-    transition-property: top, left, width, height;
-    transition-duration: 2s;*/
 }
 
 .my-clip {
@@ -366,28 +362,12 @@ div.storyHeader h1 {
 }
   .my-explainer .my-title {
     margin-bottom: 7px;
-    font: bold 16px/19px Arial;
+    font: bold 16px/19px "Open Sans";
   }
   .my-explainer .my-description {
-    font: 15px/19px Georgia; 
+    font: 15px/19px Computer Modern; 
   }
 
-/* Search ---------------------------------------*/
-
-.my-stepper-wrapper {
-  position: relative;
-}
-
-#my-search {
-  position: absolute; 
-  right: 10px; bottom: 3px;
-}
-  #my-search label {
-    display: inline-block;
-    margin-right: 5px;
-    font-size: 12px;
-    color: #999;
-  }
 
 /* Chart popup */
 
@@ -427,7 +407,6 @@ div.my-popup {
 }
 
 .my-popup td.row2 {
-    /*(padding-left: 10px*/
     font-size: 11px;
     color: #666;
 }
@@ -464,11 +443,12 @@ div.my-popup {
 .ledeStory .insetHFullWidth .storyHeader .dateline{line-height:2.4em;margin-bottom:3px;margin-top:0px;}
 .insetHFullWidth #articleToolsTop{margin-bottom:0;margin-top:0px;}
 
+/* footer */
+
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     height: 70px;
-    /*background-color: #f5f5f5;*/
 }
 
