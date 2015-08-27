@@ -29,9 +29,9 @@ function renderChart(data){
     // debugger;
     //change txt in the description
     d3.select("#firstTitle").text("Hours Studied at Udacity");
-    var txt = `Describe number of
-        weeks and median 
-        of week.`;
+    var txt = "Describe number of " +
+        "weeks and median " +
+        "of week.";
     d3.select("#firstTxt").text(txt);
     // whitespace on either side of the bars in units of MPG
     var margin = {top: 30, right: 70, bottom: 58, left: 70};

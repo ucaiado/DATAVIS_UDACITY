@@ -2,7 +2,7 @@ How Important Is The Time Spent Studying Out Of School
 --------------------------
 
 ###Abstract
-I am going to create an explanatory data visualization from [PISA](http://www.oecd.org/pisa/home/) dataset using html, java script and D3.js library. This project is  connected to the <a href="https://udacity.com/course/ud120-nd">Data Visualization and D3.js</a> course, from Udacity. 
+I am going to create an explanatory data visualization from [PISA](http://www.oecd.org/pisa/home/) dataset using html, java script and D3.js library. This project is  connected to the <a href="https://udacity.com/course/ud120-nd">Data Visualization and D3.js</a> course, from Udacity. You can check the visualizations [here](http://ucaiado.github.io/DATAVIS_UDACITY/). 
 
 ###The data set
 

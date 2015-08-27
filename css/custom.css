@@ -287,7 +287,7 @@ rect:hover{
   border-top: 1px solid black;
     padding-top: 0px;
     margin: 12px auto;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 #my-canvas {
     position: relative;
