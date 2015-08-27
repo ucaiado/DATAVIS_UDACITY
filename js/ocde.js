@@ -32,6 +32,19 @@ function ordinalInvert(f_value, f_width, arr_leftEdges, fc_Scale){
 }
 
 
+function boxplot_filter(data, s_filter){
+    /**
+     * Filter data to be used in box-plot
+     * @param: s_filter -  string with the index to be filtered
+     * @return : array with the data filtered
+     */
+    var arr_data = data.filter(function(d){ 
+        return  (d['index']==s_filter);
+    });
+
+    return arr_data
+
+}
 
 function group_data(bar_data){
      /**
@@ -69,6 +82,51 @@ function group_data(bar_data){
 //************************************************************
 
 
+function instantiateAllplots(data){
+    /**
+     * Insert all plots at once
+     */ 
+
+     //render the bar chart
+     renderBarChart(data);
+     renderBoxplot(data);  
+
+}
+
+
+function renderBoxplot(data){
+    /**
+     * plot a boxplot of the math scores splited by the time spend studying 
+     * buckets
+     */
+
+     //filter data
+    data = boxplot_filter(data, "(-5.95, -4.573](0.936, 2.313]")
+
+
+
+
+}
+
+
+function updateBoxplot(data, s_filter){
+    /**
+     * Update the boxplot based on the filter passed
+     * @param: s_filter -  string with the index to be filtered
+     */
+
+    //get data
+    data = boxplot_filter(data, s_filter)
+
+    // initiate conf variables
+    var  margin = {top: 80, right: 10, bottom: 80, left: 10};
+    var width = 600 - margin.left - margin.right;
+    var height = 400 - margin.top - margin.bottom;
+    var i_Width =  width + margin.left + margin.right;
+    var i_Height = height + margin.top + margin.bottom;  
+
+}
+
 
 
 function renderBarChart(data){
@@ -77,6 +135,7 @@ function renderBarChart(data){
      */ 
 
      //group data
+     var org_data = data;
      var data = group_data(data);
 
     // whitespace on either side of the bars in units of MPG
@@ -158,19 +217,6 @@ function renderBarChart(data){
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis);
 
-
-
-
-    // var yAxis = d3.svg.axis()
-    //     .scale(yScale)
-    //     .ticks(3)
-    //     .orient("left");
-
-    // svg.append("g")
-    //     .attr("class", "y axis")
-    //     .call(yAxis);       
-
-
     //create the brush component
     var leftEdges = ordinalXScale.range();
     var width = ordinalXScale.rangeBand();
@@ -186,19 +232,10 @@ function renderBarChart(data){
             // console.log(aux)
             var l = ordinalInvert(aux[1], width, leftEdges, ordinalXScale);
             var f = ordinalInvert(aux[0], width, leftEdges, ordinalXScale)
-            // console.log(f + "," + l);        
-              // xScale.domain(viewport.empty() ? navXScale.domain() : viewport.extent());
-              // redrawChart();   
-              // d3.select(".reset").attr("style","display:inline;");
+            //update boxplot
+            updateBoxplot(org_data, f + "" + l);
 
-
-              // xScale_pnl.domain(viewport.empty() ? navXScale.domain() : viewport.extent());
-              // redrawPnLChart();          
-              // console.log("updateChartFromViewport")
         });
-        // .on("brushend", function () {
-        //     updateZoomFromChart();
-        // });
 
     // add the viewport component to the navigation chart
     svg.append("g")
@@ -241,7 +278,7 @@ function draw_ocde() {
             return d;
             }),
         //group data
-        renderBarChart(data)
+        instantiateAllplots(data)
         }
     );
 };
