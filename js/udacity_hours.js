@@ -136,7 +136,7 @@ function draw_udacity(data) {
     var formatTime = d3.time.format("%Y-%m-%d");
 
     //Fetcching data
-    var fr_data = "../data/udacity_time.csv"
+    var fr_data = "data/udacity_time.csv"
     d3.csv(fr_data, function (error, data) {
         //redefine the format of the data
         data.forEach(function(d){
