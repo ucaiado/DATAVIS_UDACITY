@@ -93,7 +93,7 @@ color: #a81817;
 .axis path, .axis line {
   fill: none;
   /*stroke: #666;*/
-  shape-rendering: crispEdges;
+  /*shape-rendering: crispEdges;*/
 }
 
 .y.axis .domain {
@@ -141,6 +141,12 @@ rect:hover{
   color: #585f69;
   font-family: 'Open Sans', sans-serif;
   font-size: 10px;  
+}
+
+.sociallabel{
+  color: #585f69;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 11px;  
 }
 
 
@@ -370,13 +376,32 @@ div.storyHeader h1 {
   top: 30px;
   left: 130px;
 }
-  .my-explainer .my-title {
-    margin-bottom: 7px;
-    font: bold 16px/19px "Open Sans";
-  }
-  .my-explainer .my-description {
-    font: 15px/19px Computer Modern; 
-  }
+
+
+
+.my-explainer .my-title {
+  margin-bottom: 7px;
+  font: bold 16px/19px "Open Sans";
+}
+.my-explainer .my-description {
+  font: 15px/19px Computer Modern; 
+}
+
+.my-expl2 {
+  color: #000;
+  width: 365px;
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+
+.my-expl2 .my-title {
+  margin-bottom: 7px;
+  font: bold 16px/19px "Open Sans";
+}
+.my-expl2 .my-description {
+  font: 15px/19px Computer Modern; 
+}
 
 
 /* Chart popup */

@@ -75,7 +75,7 @@
                             <div id = "UdacityBars"></div>
                         </div>
                         <div class="my-canvas-legend my-canvas-legend-bottom">
-                            Date
+                            Weeks
                         </div>
                     </div>
                 <!-- Show OCDE dashboard -->
@@ -96,6 +96,7 @@
 
                                 <img src="data/img1-md.jpg" alt="..." style="width:770px;height:228px;">
                                 <!-- <div id = "UdacityBars"></div> -->
+                                <!-- <div id = "SocialBars"></div> -->
                                 
                                 <div class="my-canvas-legend my-canvas-legend-bottom">
                                     Date
@@ -109,7 +110,13 @@
                                 <img src="data/img1-md.jpg" alt="..." style="width:304px;height:228px;">
                             </div> 
                            <div class="col-md-6 my-canvas">
-                                <img src="data/img1-md.jpg" alt="..." style="width:304px;height:228px;">
+                                <!-- <h4>Number of Pupils by OCDE Social Status Index</h4> -->
+                                <div class="my-expl2">
+                                    <div class="my-title">Number of Pupils by Social Status</div>
+                                    <div class="my-description">OCDE Social Status Index</div>
+                                </div>
+                                <div id = "SocialBars"></div>
+                                <!-- <img src="data/img1-md.jpg" alt="..." style="width:304px;height:228px;"> -->
                            </div> 
 
 
@@ -185,7 +192,8 @@
 
 
 <script type="text/javascript" src="js/walk_explanations.js"></script> 
-<script type="text/javascript" src="js/udacity_hours.js"></script> 
+<script type="text/javascript" src="js/udacity_hours.js"></script>
+<script type="text/javascript" src="js/ocde.js"></script>
  
 
 <script type="text/javascript">
@@ -195,6 +203,9 @@
     //draw udacity chart
     draw_udacity();
     displayUdacity("show");
+
+    //draw others
+    draw_ocde()
 
 
 

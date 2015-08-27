@@ -1,11 +1,25 @@
 "use strict";
+/**
+ * ============================================================
+ * Load and plot data from data/udacity_time.csv. Also create 
+ * a function to nagivate through storyline
+ *
+ * Created on 08/26/2015 
+ *
+ * @author: 'ucaiado'
+ * ============================================================
+ */
+
+
 
 //************************************************************
 // begin of help functions
 //************************************************************
 
 function displayUdacity(s_type){
-    //hide (show another chart) and show udacity bar chart
+     /**
+     * hide (show another chart) and show udacity bar chart
+     */
     if(s_type=="show"){
         d3.select("#FirstChart").attr("style","display:inline;");
         d3.select("#SecondChart").attr("style","display:none;");
@@ -26,6 +40,11 @@ function displayUdacity(s_type){
 
 //create the chart object
 function renderChart(data){
+     /**
+     * reshape data as a bar chart and insert it in #UdacityBars
+     * @param: data -  array of objects with udacity_time content
+     */
+
     // debugger;
     //change txt in the description
     d3.select("#firstTitle").text("Hours Studied at Udacity");
@@ -130,7 +149,10 @@ function renderChart(data){
 
 
 //draw the bar chart
-function draw_udacity(data) {
+function draw_udacity() {
+     /**
+     * load data/udacity_time.csv and call renderChart function
+     */    
 
     //create function to parse date
     var formatTime = d3.time.format("%Y-%m-%d");
