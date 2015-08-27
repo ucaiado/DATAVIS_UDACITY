@@ -28,6 +28,7 @@ I am going to create an explanatory data visualization from [PISA](http://www.oe
 - [Project Rubric](https://docs.google.com/document/d/1zRVs73M7P5ACKB0n3Di4k0AskId3pc6lIpMBmmydETk/pub)
 - [PISA Data Visualisation Contest](http://beta.icm.edu.pl/PISAcontest/)
 - [interesting relationships in this dataset](https://books.google.com.br/books?id=0g9GAgAAQBAJ&pg=PA12&lpg=PA12&dq=pisa+2012+interesting+relationships&source=bl&ots=JP_IPR4DXD&sig=dAD56SUm0Kg1zG3adLqWgZX2h8Q&hl=en&sa=X&ved=0CDwQ6AEwBmoVChMIrMKt0JGHxwIVRI-QCh2FNAm-#v=onepage&q&f=false)
+- [filtering ordinal scale](https://stackoverflow.com/questions/20758373/inversion-with-ordinal-scale/20766269#20766269)
 - [Albert Cairo's three steps](http://vizwiz.blogspot.com.br/2013/01/alberto-cairo-three-steps-to-become.html)
 - [slopegraph](http://www.storytellingwithdata.com/blog/2014/03/more-on-slopegraphs)
 - [visual enconding](http://www.targetprocess.com/articles/visual-encoding.html)

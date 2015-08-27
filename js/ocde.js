@@ -15,14 +15,20 @@
 // begin of help functions
 //************************************************************
 
-function foo(){
+function ordinalInvert(f_value, f_width, arr_leftEdges, fc_Scale){
     /**
-     * docs
-     * @param {Type} varname Description
+     * Map a given number from fc_Scale range to a specific label 
+     * @param: f_value -  float with the scale number to be classified
+     * @param: f_width -  float with the width of each bar
+     * @param: arr_leftEdges -  array of floats with left edges from fc_Scale
+     * @param: fc_Scale -  scale function used to classify values
+     * @return : string of the desired label
      */
 
-     //code commments
-    debugger;
+    //look for what the minimum and maximum value selected are related to
+    var f;
+    for(f=0; f_value > (arr_leftEdges[f] + f_width); f++) {}
+    return fc_Scale.domain()[Math.min(5,f)]    
 }
 
 
@@ -74,7 +80,7 @@ function renderBarChart(data){
      var data = group_data(data);
 
     // whitespace on either side of the bars in units of MPG
-    var  margin = {top: 50, right: 10, bottom: 80, left: 10};
+    var  margin = {top: 80, right: 10, bottom: 80, left: 10};
     var width = 600 - margin.left - margin.right;
     var height = 400 - margin.top - margin.bottom;
     var i_Width =  width + margin.left + margin.right;
@@ -95,6 +101,7 @@ function renderBarChart(data){
 
     //construct the SVG container for the chart
     var svg = d3.select("#SocialBars").append("svg")
+        .classed('navigator', true)
         .attr("width", "100%")
         .attr("height", "100%")
         .attr("viewBox", "0 0 "+ i_Width + " "+ i_Height)
@@ -162,6 +169,46 @@ function renderBarChart(data){
     // svg.append("g")
     //     .attr("class", "y axis")
     //     .call(yAxis);       
+
+
+    //create the brush component
+    var leftEdges = ordinalXScale.range();
+    var width = ordinalXScale.rangeBand();
+
+    var viewport = d3.svg.brush()
+        .x(ordinalXScale)
+        .on("brush", function () {
+            //get the slice of the x axis selected
+            var aux =viewport.empty() ? [leftEdges[0]+1,leftEdges[5]+1] : viewport.extent()
+
+            //look for what the minimum and maximum value selected are related for
+            // console.log('')
+            // console.log(aux)
+            var l = ordinalInvert(aux[1], width, leftEdges, ordinalXScale);
+            var f = ordinalInvert(aux[0], width, leftEdges, ordinalXScale)
+            // console.log(f + "," + l);        
+              // xScale.domain(viewport.empty() ? navXScale.domain() : viewport.extent());
+              // redrawChart();   
+              // d3.select(".reset").attr("style","display:inline;");
+
+
+              // xScale_pnl.domain(viewport.empty() ? navXScale.domain() : viewport.extent());
+              // redrawPnLChart();          
+              // console.log("updateChartFromViewport")
+        });
+        // .on("brushend", function () {
+        //     updateZoomFromChart();
+        // });
+
+    // add the viewport component to the navigation chart
+    svg.append("g")
+        .attr("class", "viewport")
+        .call(viewport)
+        .selectAll("rect")
+        .attr("height", height);
+
+
+
 
 
 }
