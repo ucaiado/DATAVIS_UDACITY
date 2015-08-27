@@ -56,9 +56,9 @@
 
                 </div>
 
-
+                <!-- Show udacity hours chart -->
                 <div class="my-canvas-wrap">
-                    <div class="row">                    
+                    <div class="row" id="FirstChart" style="display:none;">                    
                         <div class="my-canvas-legend">
                             Hours 
                             <div class="my-canvas-tiny-legend">
@@ -67,18 +67,56 @@
                         </div>
 
                         <div class="my-explainer">
-                            <div class="my-title">Hours Studied at Udacity</div>
-                            <div class="my-description">
-                                Describe number of weeks and median of week. 
-                            </div>
+                            <div class="my-title" id="firstTitle"></div>
+                            <div class="my-description" id="firstTxt"></div>
                         </div>
 
                         <div class="col-md-12 my-canvas">
-                            <div id = "UdacityBars"\></div>
+                            <div id = "UdacityBars"></div>
                         </div>
                         <div class="my-canvas-legend my-canvas-legend-bottom">
                             Date
                         </div>
+                    </div>
+                <!-- Show OCDE dashboard -->
+                    <div class="row" id="SecondChart" style="display:none;">
+                        <div class="row">
+                            <div class="col-md-12 my-canvas">                   
+                                <div class="my-canvas-legend">
+                                    Hours 
+                                    <div class="my-canvas-tiny-legend">
+                                        per week
+                                    </div>
+                                </div>
+
+                                <div class="my-explainer">
+                                    <div class="my-title" id="otherTitle"></div>
+                                    <div class="my-description" id="otherTxt"></div>
+                                </div>
+
+                                <img src="/data/img1-md.jpg" alt="..." style="width:770px;height:228px;">
+                                <!-- <div id = "UdacityBars"></div> -->
+                                
+                                <div class="my-canvas-legend my-canvas-legend-bottom">
+                                    Date
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                           <div class="col-md-6 my-canvas">
+                                <img src="/data/img1-md.jpg" alt="..." style="width:304px;height:228px;">
+                            </div> 
+                           <div class="col-md-6 my-canvas">
+                                <img src="/data/img1-md.jpg" alt="..." style="width:304px;height:228px;">
+                           </div> 
+
+
+                        </div>
+
+
+
                     </div>
 
  
@@ -150,7 +188,9 @@
     //Handle data;
     handle_data();
 
+    //draw udacity chart
     draw_udacity();
+    displayUdacity("show");
 
 
 

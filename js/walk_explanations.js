@@ -61,15 +61,19 @@ function handle_data() {
       //format buttons
       d3.select(".ink-previous").classed("ink-disabled", true)
       d3.select(".ink-next").classed("ink-disabled", false)
-      //draw chart
-      draw_udacity();
+      //show chart
+      displayUdacity("show");
       
     }else if (i_idx==4){
       d3.select(".ink-previous").classed("ink-disabled", false)
-      d3.select(".ink-next").classed("ink-disabled", true)      
+      d3.select(".ink-next").classed("ink-disabled", true)
+      //hide udacity chart
+      displayUdacity("hide");
     }else{
       d3.select(".ink-previous").classed("ink-disabled", false)
       d3.select(".ink-next").classed("ink-disabled", false)   
+      //hide udacity chart
+      displayUdacity("hide");
     }
     //draw or update charts
 

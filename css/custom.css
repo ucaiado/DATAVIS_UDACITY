@@ -74,6 +74,15 @@ color: #a81817;
 .warning{
     color: rgb( 240, 20, 20 )
     }  
+/********************************
+ ** FILE: ink.css
+ ********************************/
+
+.ink {
+
+  font-family: Arial, Helvetica, sans-serif;
+
+}
 
 /********************************
  ** FILE: basicChart.css
@@ -94,12 +103,13 @@ color: #a81817;
   stroke: #666;
 }
 .axis text {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 12px;
+  font-weight: lighter;
 }
 .y text {
   fill:#666;
-  font-weight: normal;
+  /*font-weight: normal;*/
 }
 
 .y.axis .tick.minor {
@@ -119,7 +129,7 @@ color: #a81817;
 }
 
 rect {
-  /*fill: lightgrey;*/
+  fill: #71718E;
   shape-rendering: crispEdges;
 }
 
