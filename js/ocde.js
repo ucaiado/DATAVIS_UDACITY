@@ -105,15 +105,53 @@ function renderBoxplot(data){
      */
 
      //filter data
-    data = boxplot_filter(data, "(-5.95, -4.573](0.936, 2.313]")
+    var org_data = data;
+    data = boxplot_filter(org_data, "(-5.95, -4.573](0.936, 2.313]")
+    console.log("prinmeiros dados")
+    console.table(data)
+
+    //change txt in the description
+    d3.select("#otherTitle").text("Math-score by time studied");
+    var txt = "Describe number of " +
+        "weeks and median " +
+        "of week.";
+    d3.select("#otherTxt").text(txt);        
 
     // initiate conf variables
-    var  margin = {top: 10, right: 10, bottom: 80, left: 50};
-    var width = 1000 - margin.left - margin.right;
-    var height = 350 - margin.top - margin.bottom;
+    var  margin = {top: 100, right: 40, bottom: 90, left: 15};
+    var width = 550 - margin.left - margin.right;
+    var height = 450 - margin.top - margin.bottom;
     var i_Width =  width + margin.left + margin.right;
     var i_Height = height + margin.top + margin.bottom; 
     
+
+    //calculate the extent of each dimension of the datase
+    // var values_extent =[d3.min(data, function(d) { return 0; }), 
+    //     d3.max(data, function(d) { return d.upper_whisker*1.05; })]
+
+
+
+    var values_extent =[0, 810]        
+
+
+    //define the function to plot
+    var chart = d3.box()
+        .width(width)
+        .height(height)
+        .domain(values_extent); 
+
+    // define scale function
+
+    // Set a map function to convert datum to pixels.
+    var xScale = d3.scale.ordinal()
+        .domain( data.map(function(d) { return d["ST57Q01_bk"]; }))
+        .rangeBands([0, width], 0.7, 0.1);            
+        
+    // var yScale = d3.scale.linear()
+    //     .range([height, 0])
+    //     .domain(values_extent).nice(); 
+ 
+
 
     //construct the SVG container for the chart
     var svg = d3.select("#BoxPlot").append("svg")
@@ -125,25 +163,22 @@ function renderBoxplot(data){
         .attr("transform", "translate(" + margin.left + "," + 
             margin.top + ")");
 
-    //calculate the extent of each dimension of the datase
-    var values_extent =[d3.min(data, function(d) { return 0; }), 
-        d3.max(data, function(d) { return d.upper_whisker*1.05; })]
+    
+    // draw the boxplots    
+    var my_box = svg.selectAll(".box")      
+      .data(data)
+      .enter().append("g")
+        .attr("transform", function(d) { 
+            return "translate(" +  xScale(d["ST57Q01_bk"])  + "," + 0 + ")"; 
+        } )
+      .call(chart.width(xScale.rangeBand())); 
 
 
-    //define the function to plot
-    var chart = d3.box()
-        .width(width)
-        .height(height)
-        .domain(values_extent); 
 
-    // define scale function
-    var xScale = d3.scale.ordinal()     
-        .domain( data.map(function(d) { return d["ST57Q01_bk"]}))
-        .rangeRoundBands([0 , width], 0.7, 0.3);        
 
-    var yScale = d3.scale.linear()
-        .domain(values_extent)
-        .range([height + margin.top, 0 + margin.top]);
+
+
+
 
 
 
@@ -157,20 +192,34 @@ function renderBoxplot(data){
     svg.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")
-        .call(xAxis);        
+        .call(xAxis);
+
+
 
     // var yAxis = d3.svg.axis()
-    // .scale(y)
-    // .orient("left");          
+    // .ticks(6)
+    // .scale(yScale)
+    // .orient("left");
 
-    // draw the boxplots    
-    svg.selectAll(".box")      
-      .data(data)
-      .enter().append("g")
-        .attr("transform", function(d) { 
-            return "translate(" +  xScale(d["ST57Q01_bk"])  + "," + margin.top + ")"; 
-        } )
-      .call(chart.width(xScale.rangeBand())); 
+
+    // svg.append("g")
+    //     .attr("class", "y axis")
+    //     .call(yAxis);           
+
+// debugger;
+
+  setInterval(function() {
+    console.log("");
+    console.log("entrei aqui");
+    var data2 = boxplot_filter(org_data, "(-4.573, -3.196](0.936, 2.313]")
+
+    my_box.data(data2)
+      .call(chart.duration(1000)); 
+
+
+    // svg.data(data2).call(chart.duration(1000))
+  }, 5000);
+
 
 
 }
@@ -183,8 +232,9 @@ function updateBoxplot(data, s_filter){
      */
 
     //get data
+    debugger;
     data = boxplot_filter(data, s_filter)
-
+    svg.datum(data).call(chart.duration(1000))
  
 
 }
@@ -201,8 +251,8 @@ function renderBarChart(data){
      var data = group_data(data);
 
     // whitespace on either side of the bars in units of MPG
-    var  margin = {top: 80, right: 10, bottom: 80, left: 10};
-    var width = 600 - margin.left - margin.right;
+    var  margin = {top: 70, right: 10, bottom: 75, left: 10};
+    var width = 500 - margin.left - margin.right;
     var height = 400 - margin.top - margin.bottom;
     var i_Width =  width + margin.left + margin.right;
     var i_Height = height + margin.top + margin.bottom;        

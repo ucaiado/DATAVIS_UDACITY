@@ -53,7 +53,7 @@ function renderChart(data){
         "of week.";
     d3.select("#firstTxt").text(txt);
     // whitespace on either side of the bars in units of MPG
-    var margin = {top: 30, right: 70, bottom: 58, left: 70};
+    var margin = {top: 50, right: 70, bottom: 80, left: 70};
     var width = 1000 - margin.left - margin.right;
     var height = 450 - margin.top - margin.bottom;
     var i_Width =  width + margin.left + margin.right;

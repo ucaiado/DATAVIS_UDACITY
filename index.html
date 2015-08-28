@@ -26,7 +26,7 @@
         <div class="col-md-12">
             <div class="storyHeader">
                 <h6 class="dateline">
-                    August 21, 2015
+                    August 28, 2015
                 </h6>
                 <h1>How Important Is The Time Spent Studying Out Of School</h1>
             </div><!--close .storyHeader -->
@@ -58,81 +58,75 @@
 
                 <!-- Show udacity hours chart -->
                 <div class="my-canvas-wrap">
-                    <div class="row" id="FirstChart" style="display:none;">                    
-                        <div class="my-canvas-legend">
-                            Hours 
-                            <div class="my-canvas-tiny-legend">
-                                per week
+                    <div class="row" id="FirstChart" style="display:none;">
+                        <div class="col-md-12 my-canvas">                    
+                            <div class="my-canvas-legend">
+                                Hours 
+                                <div class="my-canvas-tiny-legend">
+                                    per week
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="my-explainer">
-                            <div class="my-title" id="firstTitle"></div>
-                            <div class="my-description" id="firstTxt"></div>
-                        </div>
+                            <div class="my-explainer">
+                                <div class="my-title" id="firstTitle"></div>
+                                <div class="my-description" id="firstTxt"></div>
+                            </div>
 
-                        <div class="col-md-12 my-canvas">
                             <div id = "UdacityBars"></div>
-                        </div>
-                        <div class="my-canvas-legend my-canvas-legend-bottom">
-                            Weeks
+
+                            <div class="my-canvas-legend my-canvas-legend-bottom">
+                                Weeks
+                            </div>
                         </div>
                     </div>
                 <!-- Show OCDE dashboard -->
                     <div class="row" id="SecondChart" style="display:none;">
                         <div class="row">
-                            <div class="col-md-12 my-canvas">                   
-                                <div class="my-canvas-legend">
-                                    Hours 
+                            <div class="col-md-8 my-canvas">                   
+<!--                                 <div class="my-canvas-legend">
+                                    Math Score 
                                     <div class="my-canvas-tiny-legend">
                                         per week
                                     </div>
-                                </div>
+                                </div> -->
 
-                                <div class="my-explainer">
+                                <div class="my-expl3">
                                     <div class="my-title" id="otherTitle"></div>
                                     <div class="my-description" id="otherTxt"></div>
                                 </div>
-
-                                <!-- <img src="data/img1-md.jpg" alt="..." style="width:770px;height:228px;"> -->
                                 <div id = "BoxPlot"></div>
-                                <!-- <div id = "SocialBars"></div> -->
+
                                 
                                 <div class="my-canvas-legend my-canvas-legend-bottom">
-                                    Date
+                                    Hours per week
+                                </div>
+                            </div>
+                            <div class="col-md-4 my-canvas"> 
+                                <div class="row">
+                                    <div class="col-md-6 my-canvas">
+                                
+                                        <!-- <img src="data/img1-md.jpg" alt="..." style="width:304px;height:228px;"> -->
+                                    </div>
+                                </div> 
+
+
+                                <div class="row">
+
+                                    <div class="col-md-12 my-canvas">
+                                        <!-- <h4>Number of Pupils by OCDE Social Status Index</h4> -->
+                                        <div class="my-expl3">
+                                            <div class="my-title">Number of Pupils by Social Status</div>
+                                            <div class="my-description">OCDE Social Status Index</div>
+                                        </div>
+                                        <div id = "SocialBars"></div>
+                                        <!-- <img src="data/img1-md.jpg" alt="..." style="width:304px;height:228px;"> -->
+                                    </div>
                                 </div>
                             </div>
 
-
                         </div>
-                        <div class="row">
-                           <div class="col-md-6 my-canvas">
-                                <img src="data/img1-md.jpg" alt="..." style="width:304px;height:228px;">
-                            </div> 
-                           <div class="col-md-6 my-canvas">
-                                <!-- <h4>Number of Pupils by OCDE Social Status Index</h4> -->
-                                <div class="my-expl2">
-                                    <div class="my-title">Number of Pupils by Social Status</div>
-                                    <div class="my-description">OCDE Social Status Index</div>
-                                </div>
-                                <div id = "SocialBars"></div>
-                                <!-- <img src="data/img1-md.jpg" alt="..." style="width:304px;height:228px;"> -->
-                           </div> 
-
-
-                        </div>
-
-
-
                     </div>
-
- 
-
                 </div>
-
-
-
-
             </div>
         </div>
     </div>
@@ -141,17 +135,33 @@
 
 
 
+    <!--     <div class="row">
+            <div class="col-md-12 text-center">
+                <h4>Bla</h4>
+                <div id = "UdacityBars"\></div>
+
+            </div>
+
+        </div>   -->     
+
+
+    </div><!--close .container -->
+
+
+    <!-- blank rows -->
 <!--     <div class="row">
-        <div class="col-md-12 text-center">
-            <h4>Bla</h4>
-            <div id = "UdacityBars"\></div>
-
+        <div class="col-md-12">
+        <td bgcolor="#FFFFFF" style="line-height:10px;" colspan=3>&nbsp;</td>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+        <td bgcolor="#FFFFFF" style="line-height:10px;" colspan=3>&nbsp;</td>
+        </div>
+    </div> -->
+</div>
 
-    </div>   -->     
-
-
-</div><!--close .container -->
+    <!-- footer -->
 
 <footer class="footer">
     <div class="container">

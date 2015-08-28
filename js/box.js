@@ -25,13 +25,18 @@ d3.box = function() {
 
   // For each small multiple…
   function box(g) {
+    
+    console.log("entrei no box");
+    debugger;
     g.each(function(d, i) {
-
+      debugger;
+      console.log("entrei no d[" + i +"]");
+      console.table(d);
       // d = d.map(value).sort(d3.ascending);
       var g = d3.select(this),
           n = d.length,
           min = 0,
-          max = d.upper_whisker*1.15;
+          max = 810;
 
       // Compute quartiles. Must return exactly 3 elements.
       var quartileData = d.quartiles = quartiles(d);
@@ -162,15 +167,26 @@ d3.box = function() {
 
       // Update box ticks.
       var boxTick = g.selectAll("text.box")
-          .data(quartileData);
+          .data([quartileData[1]]);//plot just the median
+
+      // debugger;
 
       boxTick.enter().append("text")
           .attr("class", "box")
           .attr("dy", ".3em")
-          .attr("dx", function(d, i) { return i & 1 ? 6 : -6 })
-          .attr("x", function(d, i) { return i & 1 ? width : 0 })
+          .attr("dx", function(d, i) {
+            return 6;
+            // return i & 1 ? 6 : -6 
+          })
+          .attr("x", function(d, i) { 
+            return 18;
+            // return i & 1 ? width : 0 
+          })
           .attr("y", x0)
-          .attr("text-anchor", function(d, i) { return i & 1 ? "start" : "end"; })
+          .attr("text-anchor", function(d, i) { 
+            return "start";
+            // return i & 1 ? "start" : "end"; 
+          })
           .text(format)
         .transition()
           .duration(duration)

@@ -193,7 +193,7 @@ rect:hover{
 
 
 
-.axis path,
+/*.axis path,
 .axis line {
   fill: none;
   stroke: #000;
@@ -204,7 +204,7 @@ rect:hover{
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
-}
+}*/
 
 
 
@@ -455,6 +455,7 @@ div.storyHeader h1 {
   left: 30px;
 }
 
+
 .my-expl2 .my-title {
   margin-bottom: 7px;
   font: bold 16px/19px "Open Sans";
@@ -462,6 +463,23 @@ div.storyHeader h1 {
 .my-expl2 .my-description {
   font: 15px/19px Computer Modern; 
 }
+
+.my-expl3 {
+  color: #000;
+  width: 365px;
+  position: absolute;
+  left: 30px;
+}
+
+.my-expl3 .my-title {
+  margin-bottom: 7px;
+  font: bold 16px/19px "Open Sans";
+}
+.my-expl3 .my-description {
+  font: 15px/19px Computer Modern; 
+}
+
+
 
 
 /* Chart popup */
