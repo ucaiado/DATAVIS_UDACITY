@@ -108,9 +108,9 @@ function renderBoxplot(data){
     data = boxplot_filter(data, "(-5.95, -4.573](0.936, 2.313]")
 
     // initiate conf variables
-    var  margin = {top: 80, right: 10, bottom: 80, left: 10};
+    var  margin = {top: 10, right: 10, bottom: 80, left: 50};
     var width = 1000 - margin.left - margin.right;
-    var height = 400 - margin.top - margin.bottom;
+    var height = 350 - margin.top - margin.bottom;
     var i_Width =  width + margin.left + margin.right;
     var i_Height = height + margin.top + margin.bottom; 
     
@@ -126,8 +126,8 @@ function renderBoxplot(data){
             margin.top + ")");
 
     //calculate the extent of each dimension of the datase
-    var values_extent =[d3.min(data, function(d) { return d.lower_quartile/1.15; }), 
-        d3.max(data, function(d) { return upper_quartile*1.15; })]
+    var values_extent =[d3.min(data, function(d) { return 0; }), 
+        d3.max(data, function(d) { return d.upper_whisker*1.05; })]
 
 
     //define the function to plot
@@ -152,6 +152,12 @@ function renderBoxplot(data){
     var xAxis = d3.svg.axis()
         .scale(xScale)
         .orient("bottom");
+
+    // insert Axis
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);        
 
     // var yAxis = d3.svg.axis()
     // .scale(y)

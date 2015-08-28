@@ -27,13 +27,11 @@ d3.box = function() {
   function box(g) {
     g.each(function(d, i) {
 
-      debugger;
-
       // d = d.map(value).sort(d3.ascending);
       var g = d3.select(this),
           n = d.length,
-          min = d.lower_quartile/1.15,
-          max = d.upper_quartile*1.15;
+          min = 0,
+          max = d.upper_whisker*1.15;
 
       // Compute quartiles. Must return exactly 3 elements.
       var quartileData = d.quartiles = quartiles(d);
@@ -50,8 +48,6 @@ d3.box = function() {
       var x0 = this.__chart__ || d3.scale.linear()
           .domain([0, Infinity])
           .range(x1.range());
-
-      debugger;
 
       // Stash the new scale.
       this.__chart__ = x1;
