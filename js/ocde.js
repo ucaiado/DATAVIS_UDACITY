@@ -15,6 +15,7 @@
 // begin of help functions
 //************************************************************
 
+
 function ordinalInvert(f_value, f_width, arr_leftEdges, fc_Scale){
     /**
      * Map a given number from fc_Scale range to a specific label 
@@ -61,6 +62,8 @@ function group_data(bar_data){
             });
         })
         .entries( bar_data.filter(function(d){ 
+            //i am not using (2.313, 3.69](2.313, 3.69] because there are too 
+            //few datapoints
             return  (d['index']=="(-5.95, -4.573](-5.95, -4.573]") ||
                     (d['index']=="(-4.573, -3.196](-4.573, -3.196]") ||
                     (d['index']=="(-3.196, -1.819](-3.196, -1.819]") ||
@@ -88,41 +91,163 @@ function group_data(bar_data){
 
 function instantiateAllplots(data){
     /**
-     * Insert all plots at once
+     * Insert all plots at once.
+     * plot a histogram of unique social-index buckets in the SocialBars id
+     * plot a boxplot of the math scores splited by the time spend studying 
+     * buckets     
      */ 
 
-     //render the bar chart
-     renderBarChart(data);
-     renderBoxplot(data);  
+    //=========begin BARCHART=========
+     //group data
+     var org_data = data;
+     var data = group_data(data);
 
-}
+    // whitespace on either side of the bars in units of MPG
+    var bar_margin = {top: 70, right: 10, bottom: 75, left: 10};
+    var bar_width = 500 - bar_margin.left - bar_margin.right;
+    var bar_height = 400 - bar_margin.top - bar_margin.bottom;
+    var i_barWidth =  bar_width + bar_margin.left + bar_margin.right;
+    var i_barHeight = bar_height + bar_margin.top + bar_margin.bottom;        
+    //calculate the extent of each dimension of the datase
+    var values_extent =[0, d3.max(data, function(d) { return d.values; })]
+
+    // Set a map function to convert datum to pixels.
+    var bar_xScale = d3.scale.ordinal()
+        .domain( data.map(function(d) { return d.key; }))
+        .rangeBands([0, bar_width], 0.03);            
+        
+    var bar_yScale = d3.scale.linear()
+        .range([bar_height, 0])
+        .domain(values_extent).nice(); 
+
+    var barWidth = bar_width / data.length;
+
+    //construct the SVG container for the chart
+    var bar_svg = d3.select("#SocialBars").append("svg")
+        .classed('navigator', true)
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .attr("viewBox", "0 0 "+ i_barWidth + " "+ i_barHeight)
+        .append("g")
+        .attr("preserveAspectRatio", "xMidYMid")
+        .attr("transform", "translate(" + bar_margin.left + "," + 
+            bar_margin.top + ")");
+
+    // Column chart
+    var columnGroup = bar_svg.selectAll(".g")
+        .data(data)
+        .enter().append("g")
+        .attr("transform", function(d,i){return "translate(" + i * barWidth + ",0)";});
+
+    // Now you can use both of them to space columns evenly:
+    columnGroup.append("rect")
+        .attr("class", "column")
+        .attr("width", bar_xScale.rangeBand())
+        .attr("height", function (d) {
+            return bar_height - bar_yScale(d.values);
+        })
+        .attr("y", function (d){
+            return bar_yScale(d.values);
+        });
+
+    //append text
+    columnGroup.append("text")
+        .attr("class", "sociallabel")
+            .attr("x", bar_xScale.rangeBand() / 2)
+            .attr("text-anchor", "middle")
+            .attr("y", function(d) { 
+                return bar_yScale(d.values) -15;
+            })
+            .attr("dy", ".55em")
+            .text(function(d) { return d.values })
+
+    bar_svg.append("text")
+        .attr("class", "my-canvas-legend my-canvas-legend-bottom")
+        .attr("text-anchor", "middle")
+        .attr("x", bar_width / 6)
+        .attr("y", bar_height + bar_margin.bottom/2)
+        .text("Social Status Buckets");             
 
 
-function renderBoxplot(data){
-    /**
-     * plot a boxplot of the math scores splited by the time spend studying 
-     * buckets
-     */
+    //format axis
+    var xAxis = d3.svg.axis()
+        .scale(bar_xScale)
+        .ticks(6)
+        .orient("bottom");
 
-     //filter data
-    var org_data = data;
+    // insert Axis
+    bar_svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + bar_height + ")")
+        .call(xAxis);
+
+    //create the brush component
+    var leftEdges = bar_xScale.range();
+    var bar_width = bar_xScale.rangeBand();
+
+    var viewport = d3.svg.brush()
+        .x(bar_xScale)
+        .on("brush", function () {
+            //get the slice of the x axis selected
+            var aux =viewport.empty() ? [leftEdges[0]+1,leftEdges[5]+1] : viewport.extent()
+
+            //look for what the minimum and maximum value selected are related for
+            // console.log('')
+            // console.log(aux)
+            var l = ordinalInvert(aux[1], bar_width, leftEdges, bar_xScale);
+            var f = ordinalInvert(aux[0], bar_width, leftEdges, bar_xScale)
+            //update boxplot
+            updateBoxplot(f + "" + l);
+
+        });
+
+    // add the viewport component to the navigation chart
+    bar_svg.append("g")
+        .attr("class", "viewport")
+        .call(viewport)
+        .selectAll("rect")
+        .attr("height", bar_height);
+
+    //create function to update the viewport when using storymonde
+    function updateViewport(s_filter) {
+        /**
+         * Update the viewport based on the index of the navigator
+         */         
+        //set the dimensions for brush
+        if (s_filter=="(-5.95, -4.573](0.936, 2.313]") {
+            viewport.clear();
+        } else {
+        //change the extent of the retangle
+            var l =s_filter.split("]")
+            viewport.extent([bar_xScale(l[0]+"]"), bar_xScale(l[1]+"]") + barWidth]);
+        }
+        //update the chart
+        bar_svg.select('.viewport').call(viewport);
+        updateBoxplot(s_filter);
+
+          
+    }          
+
+    //=========end BARCHART=========
+
+    //=========begin BOXPLOT=========
+
+    //filter data
     data = boxplot_filter(org_data, "(-5.95, -4.573](0.936, 2.313]")
-    console.log("prinmeiros dados")
-    console.table(data)
 
     //change txt in the description
-    d3.select("#otherTitle").text("Math-score by time studied");
+    d3.select("#otherTitle").text("Math-score by time studied out-of-school");
     var txt = "Describe number of " +
         "weeks and median " +
         "of week.";
     d3.select("#otherTxt").text(txt);        
 
     // initiate conf variables
-    var  margin = {top: 100, right: 40, bottom: 90, left: 15};
-    var width = 550 - margin.left - margin.right;
-    var height = 450 - margin.top - margin.bottom;
-    var i_Width =  width + margin.left + margin.right;
-    var i_Height = height + margin.top + margin.bottom; 
+    var  box_margin = {top: 100, right: 40, bottom: 90, left: 15};
+    var box_width = 550 - box_margin.left - box_margin.right;
+    var box_height = 450 - box_margin.top - box_margin.bottom;
+    var i_boxWidth =  box_width + box_margin.left + box_margin.right;
+    var i_boxHeight = box_height + box_margin.top + box_margin.bottom; 
     
 
     //calculate the extent of each dimension of the datase
@@ -136,8 +261,8 @@ function renderBoxplot(data){
 
     //define the function to plot
     var chart = d3.box()
-        .width(width)
-        .height(height)
+        .width(box_width)
+        .height(box_height)
         .domain(values_extent); 
 
     // define scale function
@@ -145,7 +270,7 @@ function renderBoxplot(data){
     // Set a map function to convert datum to pixels.
     var xScale = d3.scale.ordinal()
         .domain( data.map(function(d) { return d["ST57Q01_bk"]; }))
-        .rangeBands([0, width], 0.7, 0.1);            
+        .rangeBands([0, box_width], 0.7, 0.1);            
         
     // var yScale = d3.scale.linear()
     //     .range([height, 0])
@@ -154,18 +279,18 @@ function renderBoxplot(data){
 
 
     //construct the SVG container for the chart
-    var svg = d3.select("#BoxPlot").append("svg")
+    var box_svg = d3.select("#BoxPlot").append("svg")
         .attr("width", "100%")
         .attr("height", "100%")
-        .attr("viewBox", "0 0 "+ i_Width + " "+ i_Height)
+        .attr("viewBox", "0 0 "+ i_boxWidth + " "+ i_boxHeight)
         .append("g")
         .attr("preserveAspectRatio", "xMidYMid")
-        .attr("transform", "translate(" + margin.left + "," + 
-            margin.top + ")");
+        .attr("transform", "translate(" + box_margin.left + "," + 
+            box_margin.top + ")");
 
     
     // draw the boxplots    
-    var my_box = svg.selectAll(".box")      
+    var my_box = box_svg.selectAll(".box")      
       .data(data)
       .enter().append("g")
         .attr("transform", function(d) { 
@@ -174,193 +299,180 @@ function renderBoxplot(data){
       .call(chart.width(xScale.rangeBand())); 
 
 
-
-
-
-
-
-
-
-
-
     //plot the axis
     var xAxis = d3.svg.axis()
         .scale(xScale)
         .orient("bottom");
 
     // insert Axis
-    svg.append("g")
+    box_svg.append("g")
         .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
+        .attr("transform", "translate(0," + box_height + ")")
         .call(xAxis);
 
 
+    function updateBoxplot(s_filter){
+        //  *
+        //  * Update the boxplot based on the filter passed
+        //  * @param: s_filter -  string with the index to be filtered
+         
 
-    // var yAxis = d3.svg.axis()
-    // .ticks(6)
-    // .scale(yScale)
-    // .orient("left");
+        //get data
+        var data2 = boxplot_filter(org_data, s_filter)
+        my_box.data(data2).call(chart.duration(1000))
 
-
-    // svg.append("g")
-    //     .attr("class", "y axis")
-    //     .call(yAxis);           
-
-// debugger;
-
-  setInterval(function() {
-    console.log("");
-    console.log("entrei aqui");
-    var data2 = boxplot_filter(org_data, "(-4.573, -3.196](0.936, 2.313]")
-
-    my_box.data(data2)
-      .call(chart.duration(1000)); 
+    }
 
 
-    // svg.data(data2).call(chart.duration(1000))
-  }, 5000);
+    //=========end BOXPLOT=========
 
 
 
-}
+
+    //=========begin NAVIGATOR=========
 
 
-function updateBoxplot(data, s_filter){
-    /**
-     * Update the boxplot based on the filter passed
-     * @param: s_filter -  string with the index to be filtered
-     */
 
-    //get data
-    debugger;
-    data = boxplot_filter(data, s_filter)
-    svg.datum(data).call(chart.duration(1000))
+
+    function forward() {
+        /*
+        advance in the storyline
+        */ 
+        var i_dataIdx = +d3.select(".ink-selected").attr("data-index")
+        if (i_dataIdx+1>4){
+          var i_now = 4
+        }else{
+          var i_now = i_dataIdx+1
+        };
+        repaint(i_now);
+
+    }; 
+
+
+    function backward() {
+        /*
+        go back in the storyline
+        */ 
+
+        var i_dataIdx = +d3.select(".ink-selected").attr("data-index")
+        if (i_dataIdx-1<0){
+          var i_now = 0
+        }else{
+          var i_now = i_dataIdx-1
+        };
+        repaint(i_now);
+
+    }; 
+
+    function repaint(i_idx) {
+        /*
+        repaint index and buttons
+        */ 
+
+        //what is selected now
+        var i_dataIdx = +d3.select(".ink-selected").attr("data-index"); 
+        //repaint numbers
+        list_ink.forEach(function(d){  
+          d.forEach(function(e){
+            var i_now = +e.attributes['data-index'].value
+            if (i_now==i_dataIdx && i_dataIdx!=i_idx){
+              d3.select("#" + e.attributes['id'].value).attr("class", "ink-step")
+            }else if (i_now==i_idx && i_dataIdx!=i_idx){
+              d3.select("#" + e.attributes['id'].value).attr("class", "ink-step ink-selected")
+            }
+          });      
+        })     
+        //repaint buttons and draw/update charts
+        if (i_idx==0){
+          //format buttons
+          d3.select(".ink-previous").classed("ink-disabled", true)
+          d3.select(".ink-next").classed("ink-disabled", false)
+          //show chart
+          displayUdacity("show");
+          
+        }else if (i_idx==4){
+          d3.select(".ink-previous").classed("ink-disabled", false)
+          d3.select(".ink-next").classed("ink-disabled", true)
+          //hide udacity chart
+          displayUdacity("hide");
+          //filter all
+          var s_filter = "(-5.95, -4.573](0.936, 2.313]"; 
+          // updateBoxplot(s_filter)
+          updateViewport(s_filter) 
+          //update the explanation
+          var txt = "bla4 " +
+            "bla4 " +
+            "bla4.";
+          d3.select("#otherTxt").text(txt); 
+
+        }else if (i_idx==3){
+          d3.select(".ink-previous").classed("ink-disabled", false)
+          d3.select(".ink-next").classed("ink-disabled", false)   
+          //hide udacity chart
+          displayUdacity("hide");
+          //filter less rich
+          var s_filter = "(-4.573, -3.196](-3.196, -1.819]"; 
+          // updateBoxplot(s_filter)
+          updateViewport(s_filter)
+          //update the explanation
+          var txt = "bla3 " +
+            "bla3 " +
+            "bla3.";
+          d3.select("#otherTxt").text(txt);                    
+
+        }else if (i_idx==2){
+          d3.select(".ink-previous").classed("ink-disabled", false)
+          d3.select(".ink-next").classed("ink-disabled", false)   
+          //hide udacity chart
+          displayUdacity("hide");
+          //filter richer
+          var s_filter = "(0.936, 2.313](0.936, 2.313]"; 
+          // updateBoxplot(s_filter)
+          updateViewport(s_filter)
+          //update the explanation
+          var txt = "bla2 " +
+            "bla2 " +
+            "bla2.";
+          d3.select("#otherTxt").text(txt);                   
+
+        }else if (i_idx==1){
+          d3.select(".ink-previous").classed("ink-disabled", false)
+          d3.select(".ink-next").classed("ink-disabled", false)   
+          //hide udacity chart
+          displayUdacity("hide");
+          //filter all
+          var s_filter = "(-5.95, -4.573](0.936, 2.313]"; 
+          // updateBoxplot(s_filter)
+          updateViewport(s_filter)
+          //update the explanation
+          var txt = "bla1 " +
+            "bla1 " +
+            "bla1.";
+          d3.select("#otherTxt").text(txt);           
+
+        }
+        //draw or update charts
+
  
+    }; 
+
+
+    d3.select(".ink-previous").on("click", backward);
+    d3.select(".ink-next").on("click", forward);
+
+    var list_ink = d3.selectAll(".ink-step")
+
+    list_ink.on("click", function(d) {
+      var i_now = +this.attributes['data-index'].value
+      repaint(i_now);
+    });
+
+
+    //=========end NAVIGATOR=========
 
 }
 
 
-
-function renderBarChart(data){
-     /**
-     * plot a histogram of unique social-index buckets in the SocialBars id
-     */ 
-
-     //group data
-     var org_data = data;
-     var data = group_data(data);
-
-    // whitespace on either side of the bars in units of MPG
-    var  margin = {top: 70, right: 10, bottom: 75, left: 10};
-    var width = 500 - margin.left - margin.right;
-    var height = 400 - margin.top - margin.bottom;
-    var i_Width =  width + margin.left + margin.right;
-    var i_Height = height + margin.top + margin.bottom;        
-    //calculate the extent of each dimension of the datase
-    var values_extent =[0, d3.max(data, function(d) { return d.values; })]
-
-    // Set a map function to convert datum to pixels.
-    var ordinalXScale = d3.scale.ordinal()
-        .domain( data.map(function(d) { return d.key; }))
-        .rangeBands([0, width], 0.03);            
-        
-    var yScale = d3.scale.linear()
-        .range([height, 0])
-        .domain(values_extent).nice(); 
-
-    var barWidth = width / data.length;
-
-    //construct the SVG container for the chart
-    var svg = d3.select("#SocialBars").append("svg")
-        .classed('navigator', true)
-        .attr("width", "100%")
-        .attr("height", "100%")
-        .attr("viewBox", "0 0 "+ i_Width + " "+ i_Height)
-        .append("g")
-        .attr("preserveAspectRatio", "xMidYMid")
-        .attr("transform", "translate(" + margin.left + "," + 
-            margin.top + ")");
-
-    // Column chart
-    var columnGroup = svg.selectAll(".g")
-        .data(data)
-        .enter().append("g")
-        .attr("transform", function(d,i){return "translate(" + i * barWidth + ",0)";});
-
-    // Now you can use both of them to space columns evenly:
-    columnGroup.append("rect")
-        .attr("class", "column")
-        .attr("width", ordinalXScale.rangeBand())
-        .attr("height", function (d) {
-            return height - yScale(d.values);
-        })
-        .attr("y", function (d){
-            return yScale(d.values);
-        });
-
-    //append text
-    columnGroup.append("text")
-        .attr("class", "sociallabel")
-            .attr("x", ordinalXScale.rangeBand() / 2)
-            .attr("text-anchor", "middle")
-            .attr("y", function(d) { 
-                return yScale(d.values) -15;
-            })
-            .attr("dy", ".55em")
-            .text(function(d) { return d.values })
-
-    svg.append("text")
-        .attr("class", "my-canvas-legend my-canvas-legend-bottom")
-        .attr("text-anchor", "middle")
-        .attr("x", width / 6)
-        .attr("y", height + margin.bottom/2)
-        .text("Social Status Buckets");             
-
-
-    //format axis
-    var xAxis = d3.svg.axis()
-        .scale(ordinalXScale)
-        .ticks(6)
-        .orient("bottom");
-
-    // insert Axis
-    svg.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(xAxis);
-
-    //create the brush component
-    var leftEdges = ordinalXScale.range();
-    var width = ordinalXScale.rangeBand();
-
-    var viewport = d3.svg.brush()
-        .x(ordinalXScale)
-        .on("brush", function () {
-            //get the slice of the x axis selected
-            var aux =viewport.empty() ? [leftEdges[0]+1,leftEdges[5]+1] : viewport.extent()
-
-            //look for what the minimum and maximum value selected are related for
-            // console.log('')
-            // console.log(aux)
-            var l = ordinalInvert(aux[1], width, leftEdges, ordinalXScale);
-            var f = ordinalInvert(aux[0], width, leftEdges, ordinalXScale)
-            //update boxplot
-            updateBoxplot(org_data, f + "" + l);
-
-        });
-
-    // add the viewport component to the navigation chart
-    svg.append("g")
-        .attr("class", "viewport")
-        .call(viewport)
-        .selectAll("rect")
-        .attr("height", height);
-
-
-
-
-
-}
 
 
 //draw the bar chart

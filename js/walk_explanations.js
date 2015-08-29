@@ -61,7 +61,7 @@ function handle_data() {
       //format buttons
       d3.select(".ink-previous").classed("ink-disabled", true)
       d3.select(".ink-next").classed("ink-disabled", false)
-      //show chart
+      //draw chart
       displayUdacity("show");
       
     }else if (i_idx==4){
@@ -73,7 +73,7 @@ function handle_data() {
       d3.select(".ink-previous").classed("ink-disabled", false)
       d3.select(".ink-next").classed("ink-disabled", false)   
       //hide udacity chart
-      displayUdacity("hide");
+      displayUdacity("show");
     }
     //draw or update charts
 

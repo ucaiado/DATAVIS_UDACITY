@@ -25,16 +25,9 @@ d3.box = function() {
 
   // For each small multiple…
   function box(g) {
-    
-    console.log("entrei no box");
-    debugger;
     g.each(function(d, i) {
-      debugger;
-      console.log("entrei no d[" + i +"]");
-      console.table(d);
       // d = d.map(value).sort(d3.ascending);
       var g = d3.select(this),
-          n = d.length,
           min = 0,
           max = 810;
 
@@ -43,6 +36,7 @@ d3.box = function() {
 
       // Compute whiskers. Must return exactly 2 elements, or null.
       var whiskerData = [d.lower_whisker, d.upper_whisker]
+
 
       // Compute the new x-scale.
       var x1 = d3.scale.linear()
@@ -58,11 +52,10 @@ d3.box = function() {
       this.__chart__ = x1;
 
       // Note: the box, median, and box tick elements are fixed in number,
-      // so we only have to handle enter and update. In contrast, the outliers
-      // and other elements are variable, so we need to exit them! Variable
-      // elements also fade in and out.
+      // so we only have to handle enter and update.
 
       // Update center line: the vertical line spanning the whiskers.
+      // console.log(whiskerData)
       var center = g.selectAll("line.center")
           .data(whiskerData ? [whiskerData] : []);
 
@@ -71,13 +64,18 @@ d3.box = function() {
           .attr("x1", width / 2)
           .attr("y1", function(d) { return x0(d[0]); })
           .attr("x2", width / 2)
-          .attr("y2", function(d) { return x0(d[1]); })
+          .attr("y2", function(d) { 
+            return x0(d[1]); }
+            )
           .style("opacity", 1e-6)
         .transition()
           .duration(duration)
           .style("opacity", 1)
-          .attr("y1", function(d) { return x1(d[0]); })
-          .attr("y2", function(d) { return x1(d[1]); });
+          .attr("y1", function(d) { 
+            return x1(d[0]); })
+          .attr("y2", function(d) { 
+            // console.log(x1(d[1]))
+            return x1(d[1]); });
 
       center.transition()
           .duration(duration)

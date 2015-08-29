@@ -128,12 +128,12 @@ color: #a81817;
   fill: #666;
 }
 
-rect {
+.column {
   fill: #71718E;
   shape-rendering: crispEdges;
 }
 
-rect:hover{
+.column:hover{
   fill: rgba(0,0,0,.8);
 }
 
@@ -150,7 +150,10 @@ rect:hover{
 }
 
 
-
+.whisker{
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 12px;
+}
 
 
 .navigator .data {
@@ -175,23 +178,36 @@ rect:hover{
 
 
 .box {
-  font: 10px sans-serif;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 12px;
 }
 
-.box line,
-.box rect,
-.box circle {
-  fill: #fff;
+
+line.box,
+rect.box{
+  fill: #71718E;
   stroke: #000;
   stroke-width: 1.5px;
 }
 
-.box .center {
-  stroke-dasharray: 3,3;
+line.center {
+    fill: #fff;
+    stroke: #000;
+    stroke-width: 1.5px;
+    stroke-dasharray: 3,3;
 }
 
+line.whisker {
+    fill: #fff;
+    stroke: #000;
+    stroke-width: 1.5px;
+}
 
-
+line.median{
+    fill: #fff;
+    stroke: #000;
+    stroke-width: 1.5px;  
+}
 
 /*.axis path,
 .axis line {
