@@ -89,18 +89,21 @@ function group_data(bar_data){
 //************************************************************
 
 
-function instantiateAllplots(data){
+function instantiateAllplots(data, data2){
     /**
      * Insert all plots at once.
      * plot a histogram of unique social-index buckets in the SocialBars id
      * plot a boxplot of the math scores splited by the time spend studying 
-     * buckets     
+     * buckets
+     * @param: data -  array with the data to be used in the bar and boxplot
+     * @param: data2 - array with the data to be uses in the scatter plot
      */ 
 
     //=========begin BARCHART=========
-     //group data
-     var org_data = data;
-     var data = group_data(data);
+    //group data
+    var org_data = data;
+    var org_data2 = data2;
+    var data = group_data(data);
 
     // whitespace on either side of the bars in units of MPG
     var bar_margin = {top: 70, right: 10, bottom: 75, left: 10};
@@ -192,8 +195,6 @@ function instantiateAllplots(data){
             var aux =viewport.empty() ? [leftEdges[0]+1,leftEdges[5]+1] : viewport.extent()
 
             //look for what the minimum and maximum value selected are related for
-            // console.log('')
-            // console.log(aux)
             var l = ordinalInvert(aux[1], bar_width, leftEdges, bar_xScale);
             var f = ordinalInvert(aux[0], bar_width, leftEdges, bar_xScale)
             //update boxplot
@@ -315,17 +316,44 @@ function instantiateAllplots(data){
         //  *
         //  * Update the boxplot based on the filter passed
         //  * @param: s_filter -  string with the index to be filtered
-         
 
         //get data
         var data2 = boxplot_filter(org_data, s_filter)
         my_box.data(data2).call(chart.duration(1000))
-
     }
 
 
     //=========end BOXPLOT=========
 
+
+
+
+    //=========begin SCATTER=========
+
+    // whitespace on either side of the bars in units of MPG
+    var scatter_margin = {top: 70, right: 10, bottom: 75, left: 10};
+    var scatter_width = 500 - scatter_margin.left - scatter_margin.right;
+    var scatter_height = 400 - scatter_margin.top - scatter_margin.bottom;
+    var i_scatterWidth =  scatter_width + scatter_margin.left + scatter_margin.right;
+    var i_scatterHeight = scatter_height + scatter_margin.top + scatter_margin.bottom;        
+    //calculate the extent of each dimension of the datase
+    var values_extent =[0, d3.max(data2, function(d) { return d.values; })]
+
+    // Set a map function to convert datum to pixels
+    var scatter_xScale = d3.scale.linear()
+        .range([0, scatter_width])
+        .domain(values_extent).nice();                    
+        
+    var scatter_yScale = d3.scale.linear()
+        .range([scatter_height, 0])
+        .domain(values_extent).nice(); 
+
+
+
+
+
+
+    //=========end SCATTER=========    
 
 
 
@@ -487,6 +515,11 @@ function draw_ocde() {
     //Fetcching data
     var fr_boxplot = "data/boxplot_data.csv"
     var fr_scatter = "data/countries_agregated.csv"
+
+    //create the variable to hold the data
+    var rows1, rows2;
+
+    //load the boxplot dataset
     d3.csv(fr_boxplot, function (error, data) {
         //redefine the format of the data
         data.forEach(function(d){
@@ -500,9 +533,25 @@ function draw_ocde() {
             d.upper_whisker = +d.upper_whisker;
 
             return d;
-            }),
-        //group data
-        instantiateAllplots(data)
-        }
-    );
+            })
+        //save the data
+        rows1 = data;
+    });    
+    //load the boxplot dataset
+    d3.csv(fr_scatter, function (error, data) {
+        //redefine the format of the data
+        data.forEach(function(d){
+            d.PV1MATH= +d.PV1MATH;
+            d.ST57Q01= +d.ST57Q01;
+
+            return d;
+            })       
+        //save the data             
+        rows2 = data;
+        //plot the datavis
+        instantiateAllplots(rows1, rows2)
+    });
+
+
+
 };

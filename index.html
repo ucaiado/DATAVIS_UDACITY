@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<html lang="en">
 <head>
     <title>Out-Of-School</title>
 
@@ -22,6 +20,7 @@
 <body>
 <div class="container">
 
+    <!-- storyheader -->
     <div class="row">
         <div class="col-md-12">
             <div class="storyHeader">
@@ -29,15 +28,16 @@
                     August 28, 2015
                 </h6>
                 <h1>How Important Is The Time Spent Studying Out Of School</h1>
-            </div><!--close .storyHeader -->
+            </div>
         </div>
-    </div>
+    </div><!--close storyHeader -->
 
 
     <div class="row">
         <div class="col-md-12">
 
             <div id="my-wrapper" class="ink">
+                <!-- navigator -->
                 <div class="my-stepper-wrapper">
                     <div id="my-stepper">
                         <div class="ink-basicStepper clearfix">
@@ -52,12 +52,11 @@
                             </ul>
                         </div>
                     </div>
+                </div><!--close navigator -->
 
-
-                </div>
-
-                <!-- Show udacity hours chart -->
+                
                 <div class="my-canvas-wrap">
+                    <!--  udacity hours chart -->
                     <div class="row" id="FirstChart" style="display:none;">
                         <div class="col-md-12 my-canvas">                    
                             <div class="my-canvas-legend">
@@ -78,18 +77,13 @@
                                 Weeks
                             </div>
                         </div>
-                    </div>
-                <!-- Show OCDE dashboard -->
+                    </div><!-- close udacity hours chart -->
+
+                    <!-- Show OCDE dashboard -->
                     <div class="row" id="SecondChart" style="display:none;">
                         <div class="row">
-                            <div class="col-md-8 my-canvas">                   
-<!--                                 <div class="my-canvas-legend">
-                                    Math Score 
-                                    <div class="my-canvas-tiny-legend">
-                                        per week
-                                    </div>
-                                </div> -->
-
+                            <!-- Boxplot -->
+                            <div class="col-md-8 my-canvas">
                                 <div class="my-expl3">
                                     <div class="my-title" id="otherTitle"></div>
                                     <div class="my-description" id="otherTxt"></div>
@@ -100,32 +94,39 @@
                                 <div class="my-canvas-legend my-canvas-legend-bottom">
                                     Hours per week
                                 </div>
-                            </div>
+                            </div><!-- close Boxplot -->
+
+
                             <div class="col-md-4 my-canvas"> 
-                                <div class="row">
-                                    <div class="col-md-6 my-canvas">
-                                
-                                        <!-- <img src="data/img1-md.jpg" alt="..." style="width:304px;height:228px;"> -->
-                                    </div>
-                                </div> 
-
-
+                                <!-- barchart -->
                                 <div class="row">
 
                                     <div class="col-md-12 my-canvas">
-                                        <!-- <h4>Number of Pupils by OCDE Social Status Index</h4> -->
                                         <div class="my-expl3">
                                             <div class="my-title">Number of Pupils by Social Status</div>
                                             <div class="my-description">OCDE Social Status Index</div>
                                         </div>
                                         <div id = "SocialBars"></div>
-                                        <!-- <img src="data/img1-md.jpg" alt="..." style="width:304px;height:228px;"> -->
                                     </div>
-                                </div>
+                                </div><!-- close barchart -->
+
+                                <!-- scatter -->
+                                <div class="row">
+                                    <div class="col-md-12 my-canvas">
+                                        <div class="my-expl3">
+                                            <div class="my-title">Bla Bla</div>
+<!--                                             <div class="my-description">OCDE Social Status Index</div> -->
+                                        </div>
+                                        <div id = "Scatter"></div>                                
+
+                                    </div>
+                                </div> <!--close scatter -->
+
+
                             </div>
 
                         </div>
-                    </div>
+                    </div><!--close OCDE dashboard -->
                 </div>
             </div>
         </div>
@@ -134,35 +135,10 @@
          
 
 
-
-    <!--     <div class="row">
-            <div class="col-md-12 text-center">
-                <h4>Bla</h4>
-                <div id = "UdacityBars"\></div>
-
-            </div>
-
-        </div>   -->     
+</div><!--close container -->
 
 
-    </div><!--close .container -->
-
-
-    <!-- blank rows -->
-<!--     <div class="row">
-        <div class="col-md-12">
-        <td bgcolor="#FFFFFF" style="line-height:10px;" colspan=3>&nbsp;</td>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-        <td bgcolor="#FFFFFF" style="line-height:10px;" colspan=3>&nbsp;</td>
-        </div>
-    </div> -->
-</div>
-
-    <!-- footer -->
-
+<!-- footer -->
 <footer class="footer">
     <div class="container">
 
@@ -179,15 +155,11 @@
                             Sources: PISA; Wikipedia
                         </p>
                     </div>
-                </div><!--close .metaData element1 -->
-                <div class="element2">
-                </div><!--close .element2 -->
-            </div><!--close #interactiveFooter -->
+                </div>
+            </div>
         </div>   
-
-        <!-- <p class="text-muted">Place sticky footer content here.</p> -->
     </div>
-</footer>
+</footer><!--close footer -->
 
 
 <!-- JS Global Compulsory -->           
@@ -197,28 +169,18 @@
 <script type="text/javascript" src="js/d3.v3.min.js"></script>
 
 <!-- Charts -->
-<!-- <script type="text/javascript" src="/js/walk_explanations.js"></script> 
-<script type="text/javascript" src="/js/udacity_hours.js"></script>  -->
-
-
-<!-- <script type="text/javascript" src="js/walk_explanations.js"></script>  -->
 <script type="text/javascript" src="js/udacity_hours.js"></script>
 <script type="text/javascript" src="js/ocde.js"></script>
 <script type="text/javascript" src="js/box.js"></script>
  
 
 <script type="text/javascript">
-    //Handle data;
-    // handle_data();
-
     //draw udacity chart
     draw_udacity();
     displayUdacity("show");
 
     //draw others
     draw_ocde()
-
-
 
 </script>
 
