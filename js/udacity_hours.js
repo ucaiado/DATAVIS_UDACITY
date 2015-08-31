@@ -140,6 +140,7 @@ function renderChart(data){
         .scale(yScale)
         .ticks(3)
         .orient("left");
+        
     svg.append("g")
         .attr("class", "y axis")
         .call(yAxis);  

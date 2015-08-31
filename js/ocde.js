@@ -83,6 +83,18 @@ function group_data(bar_data){
 
 
 
+function filter_to_scatter(scatter_data, s_filter){
+    /**
+    * Filter the data to be used in the scatter
+    */  
+    var arr_data = scatter_data.filter(function(d){ 
+        return  (d['index']==s_filter);
+    });
+
+    return arr_data
+}
+
+
 
 //************************************************************
 // end of help functions
@@ -199,6 +211,7 @@ function instantiateAllplots(data, data2){
             var f = ordinalInvert(aux[0], bar_width, leftEdges, bar_xScale)
             //update boxplot
             updateBoxplot(f + "" + l);
+            updateScatterplot(f + "" + l);
 
         });
 
@@ -225,6 +238,7 @@ function instantiateAllplots(data, data2){
         //update the chart
         bar_svg.select('.viewport').call(viewport);
         updateBoxplot(s_filter);
+        updateScatterplot(s_filter);
 
           
     }          
@@ -244,7 +258,7 @@ function instantiateAllplots(data, data2){
     d3.select("#otherTxt").text(txt);        
 
     // initiate conf variables
-    var  box_margin = {top: 100, right: 40, bottom: 90, left: 15};
+    var  box_margin = {top: 100, right: 0, bottom: 90, left: 15};
     var box_width = 550 - box_margin.left - box_margin.right;
     var box_height = 450 - box_margin.top - box_margin.bottom;
     var i_boxWidth =  box_width + box_margin.left + box_margin.right;
@@ -330,26 +344,152 @@ function instantiateAllplots(data, data2){
 
     //=========begin SCATTER=========
 
+    //filter data
+    var s_filter = "(-5.95, -4.573](0.936, 2.313]"
+    var data2 = filter_to_scatter(org_data2, s_filter);
+    // debugger;
+
     // whitespace on either side of the bars in units of MPG
-    var scatter_margin = {top: 70, right: 10, bottom: 75, left: 10};
-    var scatter_width = 500 - scatter_margin.left - scatter_margin.right;
+    // var bar_margin = {top: 70, right: 10, bottom: 75, left: 10};
+    var scatter_margin = {top: 70, right: 10, bottom: 120, left: 50};
+    var scatter_width = 420 - scatter_margin.left - scatter_margin.right;
     var scatter_height = 400 - scatter_margin.top - scatter_margin.bottom;
     var i_scatterWidth =  scatter_width + scatter_margin.left + scatter_margin.right;
-    var i_scatterHeight = scatter_height + scatter_margin.top + scatter_margin.bottom;        
+    var i_scatterHeight = scatter_height + scatter_margin.top + scatter_margin.bottom;
+
     //calculate the extent of each dimension of the datase
-    var values_extent =[0, d3.max(data2, function(d) { return d.values; })]
+    var mathScore_extent =[ 280,700]
+    var timeStudied_extent =[0, 18]
 
     // Set a map function to convert datum to pixels
     var scatter_xScale = d3.scale.linear()
         .range([0, scatter_width])
-        .domain(values_extent).nice();                    
+        .domain(timeStudied_extent).nice();                    
         
     var scatter_yScale = d3.scale.linear()
         .range([scatter_height, 0])
-        .domain(values_extent).nice(); 
+        .domain(mathScore_extent).nice(); 
+
+    //construct the SVG container for the chart
+    var scatter_svg = d3.select("#Scatter").append("svg")
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .attr("viewBox", "0 0 "+ i_scatterWidth + " "+ i_scatterHeight)
+        .append("g")
+        .attr("preserveAspectRatio", "xMidYMid")
+        .attr("transform", "translate(" + scatter_margin.left + "," + 
+            scatter_margin.top + ")");
+
+    //insert the x axis
+    var xAxis = d3.svg.axis()
+        .scale(scatter_xScale)
+        .ticks(5)
+        .orient("bottom");
+
+    scatter_svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + scatter_height + ")")
+        .call(xAxis);
+
+    //insert the y axis
+    var yAxis = d3.svg.axis()
+        .scale(scatter_yScale)
+        .ticks(4)
+        .orient("left");
+
+    scatter_svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+
+    //insert the labels
+    scatter_svg.append("text")
+        .attr("class", "my-canvas-legend my-canvas-legend-bottom")
+        .attr("text-anchor", "middle")
+        .attr("x", scatter_width / 9)
+        .attr("y", scatter_height + scatter_margin.bottom/2.5)
+        .text("Hours per Week");    
+
+    // add the tooltip area to the webpage
+    var tooltip = d3.select("#Scatter").append("div")
+        .attr("class", "my-popup")
+            .style("visibility", "hidden")
+
+    tooltip.append("div").attr("class", "my-popup-label")
+        // .append("div").attr("class", "my-popup-title")
+        // .append("div").attr("class", "my-popup-line")
+        //     .append("span").attr("class", "my-popup-label")
+
+        ;
+
+    //create the the scatter plot
+
+    var my_scatter = scatter_svg.selectAll(".dot")
+      .data(data2)
+      .enter().append("circle")
+      .attr("class", function(d) {return "dot " + d.colorClass})
+      .attr("r", 3.5)
+      .attr("cx", function(d) { return scatter_xScale(d.ST57Q01); })
+      .attr("cy", function(d) { return scatter_yScale(d.PV1MATH); })
+      .on("mouseover", function(d) {
+            tooltip.transition()
+                .duration(200)
+                .style("visibility", "visible");
+
+            tooltip.style("left", (d3.mouse(d3.event.target)[0]) + "px")         
+                .style("top", (d3.mouse(d3.event.target)[1]) + "px");
+
+            debugger;
+            tooltip.select("#my-popup-label").text(1998)
+                // .attr("my-popup-title", "WEBVAN" )
+
+        
+
+      })
+      .on("mouseout", function(d) {
+          tooltip.transition()
+               .duration(500)
+               .style("visibility", "hidden");
+      });
 
 
 
+    //define the function to update the chart
+    function updateScatterplot(s_filter){
+        //  *
+        //  * Update the scatter plot based on the filter passed
+        //  * @param: s_filter -  string with the index to be filtered
+
+        //get data
+        var data2 = filter_to_scatter(org_data2, s_filter);
+
+        //join new data
+        var scatter = scatter_svg.selectAll(".dot")
+          .data(data2);
+
+        //insert new elements
+        scatter.enter().append("circle")
+          .attr("class", function(d) {return "dot " + d.colorClass})
+          .attr("r", 3.5)
+          .attr("cx", function(d) { return scatter_xScale(d.ST57Q01); })
+          .attr("cy", function(d) { return scatter_yScale(d.PV1MATH); })
+
+        //update old elements
+        scatter.transition()
+          .duration(1000)
+          .attr("r", 3.5)
+          .attr("cx", function(d) { return scatter_xScale(d.ST57Q01); })
+          .attr("cy", function(d) { return scatter_yScale(d.PV1MATH); });
+        
+        //remove old elements
+        scatter.exit().transition()
+          .duration(1000)
+          .style("opacity", 1e-6)
+          .attr("r", 3.5)
+          .attr("cx", function(d) { return scatter_xScale(d.ST57Q01); })
+          .attr("cy", function(d) { return scatter_yScale(d.PV1MATH); })
+          .remove();
+
+    }
 
 
 
@@ -358,9 +498,6 @@ function instantiateAllplots(data, data2){
 
 
     //=========begin NAVIGATOR=========
-
-
-
 
     function forward() {
         /*
@@ -426,7 +563,9 @@ function instantiateAllplots(data, data2){
           //filter all
           var s_filter = "(-5.95, -4.573](0.936, 2.313]"; 
           // updateBoxplot(s_filter)
-          updateViewport(s_filter) 
+          updateViewport(s_filter)
+          //update scatter
+          updateScatterplot(s_filter)
           //update the explanation
           var txt = "bla4 " +
             "bla4 " +
@@ -442,6 +581,8 @@ function instantiateAllplots(data, data2){
           var s_filter = "(-4.573, -3.196](-3.196, -1.819]"; 
           // updateBoxplot(s_filter)
           updateViewport(s_filter)
+          //update scatter
+          updateScatterplot(s_filter)          
           //update the explanation
           var txt = "bla3 " +
             "bla3 " +
@@ -457,6 +598,8 @@ function instantiateAllplots(data, data2){
           var s_filter = "(0.936, 2.313](0.936, 2.313]"; 
           // updateBoxplot(s_filter)
           updateViewport(s_filter)
+          //update scatter
+          updateScatterplot(s_filter)          
           //update the explanation
           var txt = "bla2 " +
             "bla2 " +
@@ -472,6 +615,8 @@ function instantiateAllplots(data, data2){
           var s_filter = "(-5.95, -4.573](0.936, 2.313]"; 
           // updateBoxplot(s_filter)
           updateViewport(s_filter)
+          //update scatter
+          updateScatterplot(s_filter)          
           //update the explanation
           var txt = "bla1 " +
             "bla1 " +
@@ -541,9 +686,9 @@ function draw_ocde() {
     d3.csv(fr_scatter, function (error, data) {
         //redefine the format of the data
         data.forEach(function(d){
-            d.PV1MATH= +d.PV1MATH;
-            d.ST57Q01= +d.ST57Q01;
-
+            d.PV1MATH = +d.PV1MATH;
+            d.ST57Q01 = +d.ST57Q01;
+            d.colorClass = d.continent.replace(/\s/g,'');
             return d;
             })       
         //save the data             
