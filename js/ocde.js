@@ -258,7 +258,7 @@ function instantiateAllplots(data, data2){
     d3.select("#otherTxt").text(txt);        
 
     // initiate conf variables
-    var  box_margin = {top: 100, right: 0, bottom: 90, left: 15};
+    var  box_margin = {top: 100, right: 35, bottom: 90, left: 15};
     var box_width = 550 - box_margin.left - box_margin.right;
     var box_height = 450 - box_margin.top - box_margin.bottom;
     var i_boxWidth =  box_width + box_margin.left + box_margin.right;
@@ -414,8 +414,17 @@ function instantiateAllplots(data, data2){
         .attr("class", "my-popup")
             .style("visibility", "hidden")
 
+    //set up the tooltip
     tooltip.append("div").attr("class", "my-popup-label")
-        // .append("div").attr("class", "my-popup-title")
+    tooltip.append("div").attr("class", "my-popup-title")
+    var table = tooltip.append("table").append("tbody")
+    var tag_tr1 = table.append("tr")
+    tag_tr1.append("td").attr("class", "row1")
+    tag_tr1.append("td").attr("class", "row1 col2")
+    var tag_tr2 = table.append("tr")
+    tag_tr2.append("td").attr("class", "row2").html("Math<br>Score")
+    tag_tr2.append("td").attr("class", "row2 col2").html("Hours<br>studied")
+
         // .append("div").attr("class", "my-popup-line")
         //     .append("span").attr("class", "my-popup-label")
 
@@ -431,21 +440,22 @@ function instantiateAllplots(data, data2){
       .attr("cx", function(d) { return scatter_xScale(d.ST57Q01); })
       .attr("cy", function(d) { return scatter_yScale(d.PV1MATH); })
       .on("mouseover", function(d) {
+            //turnon tooltips
             tooltip.transition()
                 .duration(200)
                 .style("visibility", "visible");
-
-            tooltip.style("left", (d3.mouse(d3.event.target)[0]) + "px")         
+            //position tooltip
+            tooltip.style("left", (d3.mouse(d3.event.target)[0]+30) + "px")         
                 .style("top", (d3.mouse(d3.event.target)[1]) + "px");
-
-            debugger;
-            tooltip.select("#my-popup-label").text(1998)
-                // .attr("my-popup-title", "WEBVAN" )
-
-        
+            //change the text
+            tooltip.select("div.my-popup-label").text(d.continent)
+            tooltip.select("div.my-popup-title").text(d.CNT1)
+            tooltip.select(".row1").text(Math.round(d.PV1MATH))
+            tooltip.select(".row1.col2").text(Math.round(d.ST57Q01))  
 
       })
       .on("mouseout", function(d) {
+        //turnoff tooltips
           tooltip.transition()
                .duration(500)
                .style("visibility", "hidden");

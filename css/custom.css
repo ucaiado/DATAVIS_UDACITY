@@ -559,23 +559,26 @@ div.my-popup {
     width: 100%;
 }
 
-.my-popup td {
-    text-align: center;
+td.my-popup {
+    
 }
 
-.my-popup td.row1 {
+.row1 {
+    text-align: center;
     padding-top:6px;
     padding-bottom:0px;
     font-size: 16px;
     font-weight: bold;
 }
 
-.my-popup td.row2 {
+.row2 {
+    text-align: center;
     font-size: 11px;
     color: #666;
 }
 
-.my-popup td.col2 {
+.col2 {
+    text-align: center;
     padding-left: 10px;
 }
 
