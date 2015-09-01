@@ -48,9 +48,10 @@ function renderChart(data){
     // debugger;
     //change txt in the description
     d3.select("#firstTitle").text("Hours Studied at Udacity");
-    var txt = "Describe number of " +
-        "weeks and median " +
-        "of week.";
+    var txt = "I have tried to study about 10 hours per week, as Udacity" +
+        " suggested. I ended up studying 10:30 on average, almost every day," + 
+        " 40 weeks so far. This approach was productive and makes me question" + 
+        " how long people usually study outside the school.";
     d3.select("#firstTxt").text(txt);
     // whitespace on either side of the bars in units of MPG
     var margin = {top: 50, right: 70, bottom: 80, left: 70};

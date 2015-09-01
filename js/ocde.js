@@ -514,8 +514,8 @@ function instantiateAllplots(data, data2){
         advance in the storyline
         */ 
         var i_dataIdx = +d3.select(".ink-selected").attr("data-index")
-        if (i_dataIdx+1>4){
-          var i_now = 4
+        if (i_dataIdx+1>5){
+          var i_now = 5
         }else{
           var i_now = i_dataIdx+1
         };
@@ -564,10 +564,21 @@ function instantiateAllplots(data, data2){
           d3.select(".ink-next").classed("ink-disabled", false)
           //show chart
           displayUdacity("show");
+
+        }else if (i_idx==5){
+          d3.select(".ink-previous").classed("ink-disabled", false)
+          d3.select(".ink-next").classed("ink-disabled", true)
+          //hide udacity chart
+          displayUdacity("hide");
+          //update the explanation
+          var txt = "<span class= 'lasttxt'>If you want, you can interact with this visualization" + 
+          " by selecting a range in the 'Number of Pupils' chart or mousing" +
+          " over the scatter plot to see more information about each point<span>";
+          d3.select("#otherTxt").html(txt); 
           
         }else if (i_idx==4){
           d3.select(".ink-previous").classed("ink-disabled", false)
-          d3.select(".ink-next").classed("ink-disabled", true)
+          d3.select(".ink-next").classed("ink-disabled", false)
           //hide udacity chart
           displayUdacity("hide");
           //filter all
@@ -577,10 +588,10 @@ function instantiateAllplots(data, data2){
           //update scatter
           updateScatterplot(s_filter)
           //update the explanation
-          var txt = "bla4 " +
-            "bla4 " +
-            "bla4.";
-          d3.select("#otherTxt").text(txt); 
+          var txt = "Looking at the Average Math Scores by country, I can see" + 
+          " that some of the countries with the best score don't study so long" + 
+          " out of school. I bet that they study more at school :)";
+          d3.select("#otherTxt").html(txt); 
 
         }else if (i_idx==3){
           d3.select(".ink-previous").classed("ink-disabled", false)
@@ -594,9 +605,9 @@ function instantiateAllplots(data, data2){
           //update scatter
           updateScatterplot(s_filter)          
           //update the explanation
-          var txt = "bla3 " +
-            "bla3 " +
-            "bla3.";
+          var txt = "This relation is clear when we look at just the pupils" + 
+          " with smaller social status index. There is something curious in" + 
+          " these numbers...";
           d3.select("#otherTxt").text(txt);                    
 
         }else if (i_idx==2){
@@ -611,9 +622,11 @@ function instantiateAllplots(data, data2){
           //update scatter
           updateScatterplot(s_filter)          
           //update the explanation
-          var txt = "bla2 " +
-            "bla2 " +
-            "bla2.";
+          var txt = "The Math score seems related to the time spent studying" + 
+          " outside the school and to the economic, social and cultural status" + 
+          " of each pupil.  Here you can see that the median score of " + 
+          "pupils with greater Social Index improved when they studied more " + 
+          "out of school.";
           d3.select("#otherTxt").text(txt);                   
 
         }else if (i_idx==1){
@@ -628,9 +641,9 @@ function instantiateAllplots(data, data2){
           //update scatter
           updateScatterplot(s_filter)          
           //update the explanation
-          var txt = "bla1 " +
-            "bla1 " +
-            "bla1.";
+          var txt = "Exploring the a dataset produced by OECD, that examines the skills" + 
+            " of 15-year-old school students around the world, I found some" + 
+            " interesting relationships.";
           d3.select("#otherTxt").text(txt);           
 
         }

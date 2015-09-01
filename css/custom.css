@@ -1,4 +1,8 @@
 
+/********************************
+ ** Old
+ ********************************/
+
 @font-face {
     font-family: "Computer Modern";
     src: url('http://9dbb143991406a7c655e-aa5fcb0a5a4ec34cff238a2d56ca4144.r56.cf5.rackcdn.com/cmunss.otf');
@@ -74,18 +78,9 @@ color: #a81817;
 .warning{
     color: rgb( 240, 20, 20 )
     }  
-/********************************
- ** FILE: ink.css
- ********************************/
-
-.ink {
-
-  font-family: Arial, Helvetica, sans-serif;
-
-}
 
 /********************************
- ** FILE: basicChart.css
+ ** Charts
  ********************************/
 
 /* Axes */
@@ -174,9 +169,6 @@ color: #a81817;
     fill-opacity: 0.2;
 }
 
-
-
-
 .box {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 12px;
@@ -208,20 +200,6 @@ line.median{
     stroke: #000;
     stroke-width: 1.5px;  
 }
-
-/*.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
- 
-.x.axis path { 
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}*/
-
 
 circle.Europe{
     fill: #66C2A5;
@@ -258,12 +236,23 @@ circle.Africa{
     fill-opacity: 0.9; 
 }
 
-
+.lasttxt{
+/*  font-weight: 300;
+  font-size: 22pt;*/
+  color: #4057A1;
+  font-style: italic;  
+}
 
 
 /********************************
- ** FILE: basicStepper.css
+ ** Stepper
  ********************************/
+
+.ink {
+
+  font-family: Arial, Helvetica, sans-serif;
+
+}
 
 /*Subnav*/
 #my-stepper {
@@ -350,20 +339,23 @@ circle.Africa{
 }
 
 
-
 #interactiveFooter .metaData .credit {
     text-align: left;
 }
+
 .columnGroup:last-child, .story:last-child, .story > *:last-child, .ledePhoto > *:last-child, ul:last-child, ul li:last-child, ol:last-child, ol li:last-child, dl:last-child, dl dd:last-child, p:last-child {
     margin-bottom: 0;
 }
+
 .byline, .refer, .credit {
     font-size: 1.1em;
     line-height: 1.2727em;
 }
+
 .caption, .credit {
     color: #808080;
 }
+
 .credit {
     font-size: 0.9em;
     line-height: 1.223em;
@@ -373,7 +365,7 @@ circle.Africa{
 }
 
 /********************************
- ** FILE: base.css
+ ** Base
  ********************************/
 
 /* Structure */
@@ -411,31 +403,11 @@ circle.Africa{
     width: 950px;
     height: 560px;
 }
-  #my-canvas .y path {
+
+#my-canvas .y path {
     display: none;
-  }
-
-.company {
-    position: absolute;
-    border-radius: 1000px;
 }
 
-.my-clip {
-    overflow: hidden;
-}
-
-.my-stage {
-    position: absolute;
-    padding: 0;
-    margin: 0;
-}
-
-.my-circleContainer {
-    position: absolute;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
-}
 
 /* Typography */
 
