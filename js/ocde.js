@@ -198,9 +198,7 @@ function instantiateAllplots(data, data2){
     var xAxis = d3.svg.axis()
         .scale(bar_xScale)
         .ticks(6)
-        .tickFormat(function(d) { 
-            debugger;
-            return d_newLabels[d]; })//change the text
+        .tickFormat(function(d) { return d_newLabels[d]; })//change the text
         .orient("bottom");          
 
     // insert Axis
@@ -386,6 +384,7 @@ function instantiateAllplots(data, data2){
 
     //construct the SVG container for the chart
     var scatter_svg = d3.select("#Scatter").append("svg")
+        .attr("id", "scatter_svg")
         .attr("width", "100%")
         .attr("height", "100%")
         .attr("viewBox", "0 0 "+ i_scatterWidth + " "+ i_scatterHeight)
@@ -520,6 +519,64 @@ function instantiateAllplots(data, data2){
     //=========end SCATTER=========    
 
 
+    //=========beggin LEGEND=========  
+
+
+  //drawn legend   
+  //http://bl.ocks.org/kiranml1/6972900
+  
+  var legend_collection = [
+    ['Europe','Europe','up',10],
+    ['S.America', 'SouthAmerica','down',0],
+    ['Oceania', 'Oceania','down',0],
+    ['N.America', 'NorthAmerica','down',0],
+    ['Asia', 'Asia','up',0],
+    ['C.America', 'CentralAmerica','up',0],
+    ['Africa', 'Africa','up',0]
+  ];
+
+
+
+  var legend_canvas = scatter_svg.append("svg")
+        .attr("id", "legendChart")
+        .attr("width", "90%")
+        .attr("height", "100%") 
+        .attr("viewBox", "0 0 "+ i_scatterWidth + " "+ i_scatterHeight)
+        .append("g")
+        .attr("preserveAspectRatio", "xMidYMid")
+        .attr("transform", "translate(" + (scatter_margin.left+185) + "," + 
+            (scatter_margin.top+30) + ")");
+
+
+    var arc = d3.svg.symbol().type("circle")
+          .size(function(d){ return legend_scale(4); })
+
+
+    var legend_scale = d3.scale.linear()
+          .domain([1,5])
+          .range([0,20]);
+
+    var group = legend_canvas.append('g')
+          .attr("class", "legendChart");
+
+    group.selectAll('path')
+      .data(legend_collection)
+      .enter()
+      .append('path')
+      .attr('d',arc)
+        .attr("class", function(d){ return d[1] ; })
+        .attr('transform',function(d,i){ return "translate("+(30)+","+(i*12.6)+")"; });
+      
+    group.selectAll('text')
+      .data(legend_collection)
+      .enter()
+      .append('text')
+        .attr('x',function(d,i){ return 40; })
+        .attr('y',function(d,i){ return i*12.7; })
+        .text(function(d,i){ return d[0]; });
+
+    //=========end LEGEND=========  
+
 
     //=========begin NAVIGATOR=========
 
@@ -605,7 +662,7 @@ function instantiateAllplots(data, data2){
           updateScatterplot(s_filter)
           //update the explanation and title
           d3.select("#otherTitle").text("Math-score by Time Studied Out of School");
-          var txt = "Looking at the Average Math Scores by country, I can see" + 
+          var txt = "Looking at the Average Math Scores by Country, I can see" + 
           " that some of the countries with the best score don't study so long" + 
           " out of school. I bet that they study more at school :)";
           d3.select("#otherTxt").html(txt); 

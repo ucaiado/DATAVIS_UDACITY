@@ -236,6 +236,42 @@ circle.Africa{
     fill-opacity: 0.9; 
 }
 
+
+path.Europe{
+    fill: #66C2A5;
+    fill-opacity: 1; 
+}
+
+path.SouthAmerica{
+    fill: #FA8D62;
+    fill-opacity: 1; 
+}
+
+path.Oceania{
+    fill: #8D9FCA;
+    fill-opacity: 1; 
+}
+
+path.NorthAmerica{
+    fill: #A6D853;
+    fill-opacity: 1; 
+}
+
+path.Asia{
+    fill: #34495E;
+    fill-opacity: 1; 
+}
+
+path.CentralAmerica{
+    fill: #3498DB;
+    fill-opacity: 1; 
+}
+
+path.Africa{
+    fill: #B3B3B3;
+    fill-opacity: 1; 
+}
+
 .lasttxt{
 /*  font-weight: 300;
   font-size: 22pt;*/
@@ -243,6 +279,16 @@ circle.Africa{
   font-style: italic;  
 }
 
+svg#legendChart {
+  margin-top: 30px;
+  margin-left: 30px;
+  background-color: #EEEEEE;
+  color: #585f69;
+  text-shadow: none;
+  font-size: 9px;
+  font-weight: lighter;
+  font-family: 'Open Sans', sans-serif;  
+}
 
 /********************************
  ** Stepper
