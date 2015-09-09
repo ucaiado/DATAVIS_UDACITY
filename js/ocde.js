@@ -117,9 +117,19 @@ function instantiateAllplots(data, data2){
     var org_data2 = data2;
     var data = group_data(data);
 
+    //create a dictionary to change the labels of the x axis
+    var d_newLabels ={
+        "(-5.95, -4.573]": "smaller--",
+        "(-4.573, -3.196]": "smaller-",
+        "(-3.196, -1.819]": "smaller",
+        "(-1.819, -0.441]": "medium",
+        "(-0.441, 0.936]": "bigger",
+        "(0.936, 2.313]": "bigger+"
+    }
+
     // whitespace on either side of the bars in units of MPG
     var bar_margin = {top: 70, right: 10, bottom: 75, left: 10};
-    var bar_width = 500 - bar_margin.left - bar_margin.right;
+    var bar_width = 450 - bar_margin.left - bar_margin.right;
     var bar_height = 400 - bar_margin.top - bar_margin.bottom;
     var i_barWidth =  bar_width + bar_margin.left + bar_margin.right;
     var i_barHeight = bar_height + bar_margin.top + bar_margin.bottom;        
@@ -188,13 +198,17 @@ function instantiateAllplots(data, data2){
     var xAxis = d3.svg.axis()
         .scale(bar_xScale)
         .ticks(6)
-        .orient("bottom");
+        .tickFormat(function(d) { 
+            debugger;
+            return d_newLabels[d]; })//change the text
+        .orient("bottom");          
 
     // insert Axis
     bar_svg.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + bar_height + ")")
         .call(xAxis);
+
 
     //create the brush component
     var leftEdges = bar_xScale.range();

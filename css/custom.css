@@ -440,15 +440,34 @@ div.storyHeader h1 {
   width: 77px;
   text-align: right;
 }
-  .my-canvas-tiny-legend {
-    font: normal 11px/15px Arial;
-  }
-  .my-canvas-legend-bottom {
-    top: auto;
-    bottom: 38px;
-    width: 100px;
-    left: 62px;
-  }
+.my-canvas-tiny-legend {
+  font: normal 11px/15px Arial;
+}
+.my-canvas-legend-bottom {
+  top: auto;
+  bottom: 38px;
+  width: 100px;
+  left: 62px;
+}
+
+
+text.my-canvas-legend {
+  position: absolute;
+  left: 0; top: 30px;
+  color: #666;
+  font: bold 14px/16px Arial;
+  width: 77px;
+  text-align: right;
+}
+text.my-canvas-tiny-legend {
+  font: normal 11px/15px Arial;
+}
+text.my-canvas-legend-bottom {
+  top: auto;
+  bottom: 38px;
+  width: 100px;
+  left: 62px;
+}
 
 /* Explainer ---------------------------------------*/
 
