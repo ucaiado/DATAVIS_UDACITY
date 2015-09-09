@@ -63,8 +63,20 @@ In this chart, the user can check more information about each datapoint mousing 
 
 
 ###Feedback
-The __first feedback__ that I received wasn't exactly a formal feedback. I was working on the visualization, and my friend looked at my screen and suggested that I should change the disposition of my charts on the screen, even before I explain what I was doing. Then, I [tested](https://github.com/ucaiado/DATAVIS_UDACITY/commit/0f16b38f9ac302327bb76e0b5b6217d46fbf70df)  some different dispositions, and I ended up really changing what I was doing.
+The __first feedback__ that I received wasn’t exactly a formal feedback. I was working on the visualization, and my friend looked at my screen and suggested that I should change the disposition of my charts on the screen, even before I explain what I was doing. Then, I [tested](https://github.com/ucaiado/DATAVIS_UDACITY/commit/0f16b38f9ac302327bb76e0b5b6217d46fbf70df) some different dispositions, and I ended up changing what I was doing.
 
+The [__second feedback__](https://discussions.udacity.com/t/project-6-feedback-required/30744/3) I received was from Charlie, an Udacity coach. She suggested that I could use more specific titles to my visualization to make the message clear when I filter out the data. Also she noticed that the use of colors on scatter plot isn't clear; that I could summarize the buckets in my histogram in a better way; that the footer was overlapping the visualization; and that the scatter plot is too small. 
+
+The __last feedback__ received I took personally. Was pointed out that the footer was overlapping the visualization, as Chalie also noticed. Also was noticed that the Y-axis in the first chart wasn’t clear; and suggested that I could use a legend in the scatter plot to explain the colors
+
+I did the following changes based on the last two feedbacks:
+
+- fixed the footer behavior
+- make the visualization a little bigger
+- exclude the y-axis title in the first chart
+- change the explanation in the box-plot on each step to emphasize what was filtered out
+- change the buckets in my histogram to text. As the only important information in the numbers is that they are ordered, I changed the titles of each bar;
+- add a legend to the scatter plot explaining that the colors are about the continents
 
 
 

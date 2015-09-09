@@ -47,14 +47,14 @@ function renderChart(data){
 
     // debugger;
     //change txt in the description
-    d3.select("#firstTitle").text("Hours Studied at Udacity");
+    d3.select("#firstTitle").text("Hours Studied per Week at Udacity");
     var txt = "I have tried to study about 10 hours per week, as Udacity" +
         " suggested. I ended up studying 10:30 on average, almost every day," + 
         " 40 weeks so far. This approach was productive and makes me question" + 
         " how long people usually study outside the school.";
     d3.select("#firstTxt").text(txt);
     // whitespace on either side of the bars in units of MPG
-    var margin = {top: 50, right: 70, bottom: 80, left: 70};
+    var margin = {top: 50, right: 30, bottom: 80, left: 30};
     var width = 1000 - margin.left - margin.right;
     var height = 450 - margin.top - margin.bottom;
     var i_Width =  width + margin.left + margin.right;
@@ -137,14 +137,14 @@ function renderChart(data){
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis);
 
-    var yAxis = d3.svg.axis()
-        .scale(yScale)
-        .ticks(3)
-        .orient("left");
+    // var yAxis = d3.svg.axis()
+    //     .scale(yScale)
+    //     .ticks(3)
+    //     .orient("left");
         
-    svg.append("g")
-        .attr("class", "y axis")
-        .call(yAxis);  
+    // svg.append("g")
+    //     .attr("class", "y axis")
+    //     .call(yAxis);  
 
 
     };
